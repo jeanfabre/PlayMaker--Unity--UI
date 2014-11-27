@@ -1,0 +1,5 @@
+{
+"__ECO__":"__TEMPLATE__",
+"unitypackage":"PlayMaker/Ecosystem/Custom Packages/uGui/uGuiProxy.unitypackage",
+"pingAssetPath":"Assets/PlayMaker uGui/PlayMakerUGuiComponentProxy.cs"
+}
