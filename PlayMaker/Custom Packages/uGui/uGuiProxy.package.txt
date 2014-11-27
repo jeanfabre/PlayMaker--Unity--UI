@@ -1,5 +1,10 @@
 {
-"__ECO__":"__TEMPLATE__",
+"__ECO__":"__PACKAGE__",
+"Type":"Unity Module",
+"UnityModules":["UI"],
+"Version":"1.0.0",
+"UnityMinimumVersion":"4.6.0",
+"PlayMakerMinimumVersion":"1.7.0",
 "unitypackage":"PlayMaker/Ecosystem/Custom Packages/uGui/uGuiProxy.unitypackage",
 "pingAssetPath":"Assets/PlayMaker uGui/PlayMakerUGuiComponentProxy.cs"
 }
