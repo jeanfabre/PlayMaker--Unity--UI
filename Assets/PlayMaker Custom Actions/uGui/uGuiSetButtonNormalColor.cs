@@ -53,7 +53,7 @@ namespace HutongGames.PlayMaker.Actions
 		
 		public override void OnEnter()
 		{
-			Initilize(Fsm.GetOwnerDefaultTarget(gameObject));
+			Initialize(Fsm.GetOwnerDefaultTarget(gameObject));
 
 			DoSetButtonColor();
 			
@@ -79,7 +79,7 @@ namespace HutongGames.PlayMaker.Actions
 		}
 		
 
-		void Initilize(GameObject go)
+		void Initialize(GameObject go)
 		{
 			if (go == null)
 			{
