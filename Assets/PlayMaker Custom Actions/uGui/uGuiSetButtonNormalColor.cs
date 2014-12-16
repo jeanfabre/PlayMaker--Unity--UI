@@ -22,30 +22,26 @@ namespace HutongGames.PlayMaker.Actions
 		
 		
 		// MW this could be private: but in some cases it could be usefull to save the old value in a pm var or for debugging
-		[Tooltip("The former color of the UGui component.")]
-		public FsmColor storedOldColor;
+		// JFF: yes it should be private, else the user will use a getcolor action if he really wants it.
+		//[Tooltip("The former color of the UGui component.")]
+		//public FsmColor storedOldColor;
 		
-		
-		
+
 		[Tooltip("Reset when exiting this state.")]
 		public bool resetOnExit;
 		
-		[Tooltip("Bypass button to drive the action by bool")]
+		[Tooltip("Bypass button to drive the action by bool. Action will not be performed if False")]
 		public FsmBool enabled = true;
 
+		[Tooltip("Runs everyframe. Useful to animate values over time.")]
 		public bool everyFrame;
-		
-		
 
 		private uUI.Button _Button;
-		private uUI.ColorBlock _CB;
-
-		
+		private Color _OriginalNormalColor;
 
 		public override void Reset()
 		{
 			normalColor = null;
-			storedOldColor = null;
 			resetOnExit = false;
 			everyFrame = false;
 			enabled = true;
@@ -55,11 +51,16 @@ namespace HutongGames.PlayMaker.Actions
 		{
 			Initialize(Fsm.GetOwnerDefaultTarget(gameObject));
 
+			// jff: only save if we need to, Could do it in Initialize, but not really the right scope.
+			if (_Button!=null && resetOnExit)
+			{
+				_OriginalNormalColor = _Button.colors.normalColor;
+			}
+
 			DoSetButtonColor();
-			
+	
 			if (!everyFrame)
 				Finish();
-			
 		}
 		
 		
@@ -67,71 +68,57 @@ namespace HutongGames.PlayMaker.Actions
 		{
 			DoSetButtonColor();
 		}
-		
-		
+
 		
 		public override void OnExit()
 		{
-				if (resetOnExit)
-				{
-					DoSetOldColorValue();
-				}
+			if (resetOnExit)
+			{
+				DoSetOldColorValue();
+			}
 		}
 		
-
+		// JFF: initialize should never call Finish(), or at least it should check then the everyframe option. the only place should be at the end of the OnEnter indeed.
+		// this is why calling a method to do all the caching makes the onEnter method a lot easier to write and understand.
 		void Initialize(GameObject go)
 		{
 			if (go == null)
 			{
 				LogError("Missing Button Component!");
-				Finish();
+				return;
 			}
-			
-			// this might be usefull for checking for the right component  but i dont know the right type
-			/* 
-			if (go.collider == null)
-			{   LogError("Missing Collider!");
-				Finish();
-			}
-			*/
-			
+
 			// get the component
 			_Button = go.GetComponent<uUI.Button>();
-			_CB = _Button.colors;
+
+			if (_Button==null)
+			{
+				LogError("Missing UI.Button on "+go.name);
+				return;
+			}
 		}
 		
 		void DoSetButtonColor()
 		{
-			if (enabled.Value == false)
-			{
-				Finish();
-			}
-			else
-			{
-				if (_Button!=null)
-				{	
-				
-					// store old data for reset.
-					storedOldColor.Value = _CB.normalColor;
-					
-					// Do the actual action stuff here.	
-					_CB.normalColor = normalColor.Value;
-					_Button.colors = _CB;
-				}
-				else
-				{   LogError("Missing Button Component!");
-					return; 
-				}
+			if (_Button!=null && enabled.Value)
+			{	
+				// Do the actual action stuff here.	
+				uUI.ColorBlock _colorBlock = _Button.colors; 
+				_colorBlock.normalColor = normalColor.Value;
+				_Button.colors = _colorBlock;
 			}
 		}
 		
 		void DoSetOldColorValue()
 		{
-			if (_Button!=null)
+			if (_Button!=null && enabled.Value) // JFF: enabled should be consistent, if enabled is false, it should not do anything at all.
 			{
-			// reset
-				_CB.normalColor = storedOldColor.Value;
-				_Button.colors = _CB;
+				// reset
+				uUI.ColorBlock _colorBlock = _Button.colors; 
+				_colorBlock.normalColor = _OriginalNormalColor;
+				_Button.colors = _colorBlock;
+				// if you reset using the whole Colorblock taken from the start, other actions that may change other properties of the same ColorBlock will be corrupted.
+				// that's why I take the latest ColorBlock at the time I need to change the normal Color, and straight away reassign it. nothing else will be affected. Same in DoSetButtonColor()
 			}
 		}
 		
