@@ -17,10 +17,15 @@
 sysinfo.txt
 
 Temp/
-Assets/PlayMaker/
-Assets/iTween/
 
-Chili4U/
-uTomate/
-uTomate Plan/
-uTomateProjectProperties
+/Assets/PlayMaker/
+/Assets/iTween/
+/Assets/Gizmos/
+/Assets/Photon Unity Networking
+/Assets/Photon Unity Networking.meta
+
+/Assets/Chili4U/
+/Assets/uTomate/
+/Assets/uTomate Plan/
+/Assets/uTomateProjectProperties
+
