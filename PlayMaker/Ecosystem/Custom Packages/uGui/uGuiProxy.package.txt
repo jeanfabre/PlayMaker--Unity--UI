@@ -7,5 +7,5 @@
 "PlayMakerMinimumVersion":"1.7.0",
 "unitypackage":"PlayMaker/Ecosystem/Custom Packages/uGui/uGuiProxy.unitypackage",
 "pingAssetPath":"Assets/PlayMaker uGui/PlayMakerUGuiComponentProxy.cs",
-"YoutubeVideos":["http://www.youtube.com/playlist?list=PLFXYYxmSM-Ge4Qxx80EnT6xiLHQXKGHW3"]
+"YoutubeVideos":["http://www.youtube.com/watch?v=KZCtGySZ4AI&index=1&list=PLFXYYxmSM-Ge4Qxx80EnT6xiLHQXKGHW3"]
 }
