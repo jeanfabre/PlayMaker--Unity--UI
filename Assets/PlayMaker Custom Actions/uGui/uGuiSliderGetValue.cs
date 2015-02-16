@@ -6,40 +6,41 @@ using UnityEngine;
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory("uGui")]
-	[Tooltip("Gets the text value of a UGui Text component.")]
-	public class uGuiGetText : FsmStateAction
+	[Tooltip("Gets the value of a UGui Slider component.")]
+	public class uGuiSliderGetValue : FsmStateAction
 	{
 		[RequiredField]
-		[CheckForComponent(typeof(UnityEngine.UI.Text))]
-		[Tooltip("The GameObject with the text ui component.")]
+		[CheckForComponent(typeof(UnityEngine.UI.Slider))]
+		[Tooltip("The GameObject with the slider UGui component.")]
 		public FsmOwnerDefault gameObject;
-		
+
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
-		[Tooltip("The text value of the UGui Text component.")]
-		public FsmString text;
+		[Tooltip("The value of the UGui slider component.")]
+		public FsmFloat value;
 
-		[Tooltip("Runs everyframe. Useful to animate values over time.")]
+		[Tooltip("Repeats every frame")]
 		public bool everyFrame;
-		
-		private UnityEngine.UI.Text _text;
-		
+
+		private UnityEngine.UI.Slider _slider;
+
 		public override void Reset()
 		{
-			text = null;
+			gameObject = null;
+			value = null;
 			everyFrame = false;
 		}
 		
 		public override void OnEnter()
 		{
-			
+
 			GameObject _go = Fsm.GetOwnerDefaultTarget(gameObject);
 			if (_go!=null)
 			{
-				_text = _go.GetComponent<UnityEngine.UI.Text>();
+				_slider = _go.GetComponent<UnityEngine.UI.Slider>();
 			}
-			
-			DoGetTextValue();
+
+			DoGetValue();
 			
 			if (!everyFrame)
 			{
@@ -49,16 +50,16 @@ namespace HutongGames.PlayMaker.Actions
 		
 		public override void OnUpdate()
 		{
-			DoGetTextValue();
+			DoGetValue();
 		}
 		
-		void DoGetTextValue()
+		void DoGetValue()
 		{
-			if (_text!=null)
+
+			if (_slider!=null)
 			{
-				text.Value = _text.text;
+				value.Value = _slider.value ;
 			}
 		}
-		
 	}
 }

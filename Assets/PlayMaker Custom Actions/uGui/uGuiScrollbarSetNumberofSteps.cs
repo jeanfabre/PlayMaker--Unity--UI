@@ -6,32 +6,32 @@ using UnityEngine;
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory("uGui")]
-	[Tooltip("Sets the text value of a UGui Text component.")]
-	public class uGuiSetText : FsmStateAction
+	[Tooltip("Sets the number of distinct scroll positions allowed of a uGui Scrollbar component.")]
+	public class uGuiScrollbarSetNumberOfSteps : FsmStateAction
 	{
 		[RequiredField]
-		[CheckForComponent(typeof(UnityEngine.UI.Text))]
-		[Tooltip("The GameObject with the text ui component.")]
+		[CheckForComponent(typeof(UnityEngine.UI.Scrollbar))]
+		[Tooltip("The GameObject with the Scrollbar UGui component.")]
 		public FsmOwnerDefault gameObject;
 
 		[RequiredField]
-		[UIHint(UIHint.TextArea)]
-		[Tooltip("The text of the UGui Text component.")]
-		public FsmString text;
-
+		[Tooltip("The number of distinct scroll positions allowed of the uGui Scrollbar component.")]
+		public FsmInt value;
+	
 		[Tooltip("Reset when exiting this state.")]
 		public FsmBool resetOnExit;
 
 		[Tooltip("Repeats every frame")]
 		public bool everyFrame;
 
-		private UnityEngine.UI.Text _text;
-		string _originalString;
+		private UnityEngine.UI.Scrollbar _scrollbar;
+
+		int _originalValue;
 
 		public override void Reset()
 		{
 			gameObject = null;
-			text = null;
+			value = null;
 			resetOnExit = null;
 			everyFrame = false;
 		}
@@ -42,46 +42,46 @@ namespace HutongGames.PlayMaker.Actions
 			GameObject _go = Fsm.GetOwnerDefaultTarget(gameObject);
 			if (_go!=null)
 			{
-				_text = _go.GetComponent<UnityEngine.UI.Text>();
+				_scrollbar = _go.GetComponent<UnityEngine.UI.Scrollbar>();
 			}
 
 			if (resetOnExit.Value)
 			{
-				_originalString = _text.text;
+				_originalValue = _scrollbar.numberOfSteps;
 			}
 
-			DoSetTextValue();
-			
+			DoSetValue();
+
 			if (!everyFrame)
 			{
 				Finish();
 			}
 		}
-		
+
 		public override void OnUpdate()
 		{
-			DoSetTextValue();
+			DoSetValue();
 		}
-		
-		void DoSetTextValue()
+	
+		void DoSetValue()
 		{
 
-			if (_text!=null)
+			if (_scrollbar!=null)
 			{
-				_text.text = text.Value;
+				_scrollbar.numberOfSteps = value.Value;
 			}
 		}
 
 		public override void OnExit()
 		{
-			if (_text==null)
+			if (_scrollbar==null)
 			{
 				return;
 			}
 			
 			if (resetOnExit.Value)
 			{
-				_text.text = _originalString;
+				_scrollbar.numberOfSteps = _originalValue;
 			}
 		}
 	}

@@ -6,17 +6,17 @@ using UnityEngine;
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory("uGui")]
-	[Tooltip("Sets the text value of a UGui Text component.")]
-	public class uGuiSetText : FsmStateAction
+	[Tooltip("Sets the text value of a UGui InputField component.")]
+	public class uGuiInputFieldSetText : FsmStateAction
 	{
 		[RequiredField]
-		[CheckForComponent(typeof(UnityEngine.UI.Text))]
-		[Tooltip("The GameObject with the text ui component.")]
+		[CheckForComponent(typeof(UnityEngine.UI.InputField))]
+		[Tooltip("The GameObject with the InputField ui component.")]
 		public FsmOwnerDefault gameObject;
 
 		[RequiredField]
 		[UIHint(UIHint.TextArea)]
-		[Tooltip("The text of the UGui Text component.")]
+		[Tooltip("The text of the UGui InputField component.")]
 		public FsmString text;
 
 		[Tooltip("Reset when exiting this state.")]
@@ -25,7 +25,8 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("Repeats every frame")]
 		public bool everyFrame;
 
-		private UnityEngine.UI.Text _text;
+		private UnityEngine.UI.InputField _inputField;
+
 		string _originalString;
 
 		public override void Reset()
@@ -42,12 +43,12 @@ namespace HutongGames.PlayMaker.Actions
 			GameObject _go = Fsm.GetOwnerDefaultTarget(gameObject);
 			if (_go!=null)
 			{
-				_text = _go.GetComponent<UnityEngine.UI.Text>();
+				_inputField = _go.GetComponent<UnityEngine.UI.InputField>();
 			}
 
 			if (resetOnExit.Value)
 			{
-				_originalString = _text.text;
+				_originalString = _inputField.text;
 			}
 
 			DoSetTextValue();
@@ -66,22 +67,22 @@ namespace HutongGames.PlayMaker.Actions
 		void DoSetTextValue()
 		{
 
-			if (_text!=null)
+			if (_inputField!=null)
 			{
-				_text.text = text.Value;
+				_inputField.text = text.Value;
 			}
 		}
 
 		public override void OnExit()
 		{
-			if (_text==null)
+			if (_inputField==null)
 			{
 				return;
 			}
 			
 			if (resetOnExit.Value)
 			{
-				_text.text = _originalString;
+				_inputField.text = _originalString;
 			}
 		}
 	}

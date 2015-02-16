@@ -6,23 +6,22 @@ using UnityEngine;
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory("uGui")]
-	[Tooltip("Gets the text value of a UGui Text component.")]
-	public class uGuiGetText : FsmStateAction
+	[Tooltip("Gets the text value of a UGui InputField component.")]
+	public class uGuiInputFieldGetText : FsmStateAction
 	{
 		[RequiredField]
-		[CheckForComponent(typeof(UnityEngine.UI.Text))]
-		[Tooltip("The GameObject with the text ui component.")]
+		[CheckForComponent(typeof(UnityEngine.UI.InputField))]
+		[Tooltip("The GameObject with the InputField ui component.")]
 		public FsmOwnerDefault gameObject;
 		
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
-		[Tooltip("The text value of the UGui Text component.")]
+		[Tooltip("The text value of the UGui InputField component.")]
 		public FsmString text;
-
-		[Tooltip("Runs everyframe. Useful to animate values over time.")]
+		
 		public bool everyFrame;
 		
-		private UnityEngine.UI.Text _text;
+		private UnityEngine.UI.InputField _inputField;
 		
 		public override void Reset()
 		{
@@ -36,15 +35,13 @@ namespace HutongGames.PlayMaker.Actions
 			GameObject _go = Fsm.GetOwnerDefaultTarget(gameObject);
 			if (_go!=null)
 			{
-				_text = _go.GetComponent<UnityEngine.UI.Text>();
+				_inputField = _go.GetComponent<UnityEngine.UI.InputField>();
 			}
 			
 			DoGetTextValue();
 			
 			if (!everyFrame)
-			{
 				Finish();
-			}
 		}
 		
 		public override void OnUpdate()
@@ -54,9 +51,9 @@ namespace HutongGames.PlayMaker.Actions
 		
 		void DoGetTextValue()
 		{
-			if (_text!=null)
+			if (_inputField!=null)
 			{
-				text.Value = _text.text;
+				text.Value = _inputField.text;
 			}
 		}
 		

@@ -6,18 +6,18 @@ using UnityEngine;
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory("uGui")]
-	[Tooltip("Sets the text value of a UGui Text component.")]
-	public class uGuiSetText : FsmStateAction
+	[Tooltip("Sets the normalized value ( between 0 and 1) of a UGui Slider component.")]
+	public class uGuiSliderSetNormalizedValue : FsmStateAction
 	{
 		[RequiredField]
-		[CheckForComponent(typeof(UnityEngine.UI.Text))]
-		[Tooltip("The GameObject with the text ui component.")]
+		[CheckForComponent(typeof(UnityEngine.UI.Slider))]
+		[Tooltip("The GameObject with the slider UGui component.")]
 		public FsmOwnerDefault gameObject;
 
 		[RequiredField]
-		[UIHint(UIHint.TextArea)]
-		[Tooltip("The text of the UGui Text component.")]
-		public FsmString text;
+		[HasFloatSlider(0f,1f)]
+		[Tooltip("The normalized value ( between 0 and 1) of the UGui slider component.")]
+		public FsmFloat value;
 
 		[Tooltip("Reset when exiting this state.")]
 		public FsmBool resetOnExit;
@@ -25,13 +25,14 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("Repeats every frame")]
 		public bool everyFrame;
 
-		private UnityEngine.UI.Text _text;
-		string _originalString;
+		private UnityEngine.UI.Slider _slider;
+
+		float _originalValue;
 
 		public override void Reset()
 		{
 			gameObject = null;
-			text = null;
+			value = null;
 			resetOnExit = null;
 			everyFrame = false;
 		}
@@ -42,15 +43,15 @@ namespace HutongGames.PlayMaker.Actions
 			GameObject _go = Fsm.GetOwnerDefaultTarget(gameObject);
 			if (_go!=null)
 			{
-				_text = _go.GetComponent<UnityEngine.UI.Text>();
+				_slider = _go.GetComponent<UnityEngine.UI.Slider>();
 			}
 
 			if (resetOnExit.Value)
 			{
-				_originalString = _text.text;
+				_originalValue = _slider.normalizedValue;
 			}
 
-			DoSetTextValue();
+			DoSetValue();
 			
 			if (!everyFrame)
 			{
@@ -60,28 +61,28 @@ namespace HutongGames.PlayMaker.Actions
 		
 		public override void OnUpdate()
 		{
-			DoSetTextValue();
+			DoSetValue();
 		}
 		
-		void DoSetTextValue()
+		void DoSetValue()
 		{
 
-			if (_text!=null)
+			if (_slider!=null)
 			{
-				_text.text = text.Value;
+				_slider.normalizedValue = value.Value;
 			}
 		}
 
 		public override void OnExit()
 		{
-			if (_text==null)
+			if (_slider==null)
 			{
 				return;
 			}
 			
 			if (resetOnExit.Value)
 			{
-				_text.text = _originalString;
+				_slider.normalizedValue = _originalValue;
 			}
 		}
 	}

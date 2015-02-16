@@ -6,32 +6,32 @@ using UnityEngine;
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory("uGui")]
-	[Tooltip("Sets the text value of a UGui Text component.")]
-	public class uGuiSetText : FsmStateAction
+	[Tooltip("Sets the caret's blink rate of a UGui InputField component.")]
+	public class uGuiInputfieldSetCaretBlinkRate : FsmStateAction
 	{
 		[RequiredField]
-		[CheckForComponent(typeof(UnityEngine.UI.Text))]
-		[Tooltip("The GameObject with the text ui component.")]
+		[CheckForComponent(typeof(UnityEngine.UI.InputField))]
+		[Tooltip("The GameObject with the InputField ui component.")]
 		public FsmOwnerDefault gameObject;
 
 		[RequiredField]
-		[UIHint(UIHint.TextArea)]
-		[Tooltip("The text of the UGui Text component.")]
-		public FsmString text;
+		[Tooltip("The caret's blink rate for the UGui InputField component.")]
+		public FsmInt caretBlinkRate;
 
-		[Tooltip("Reset when exiting this state.")]
+		[Tooltip("Deactivate when exiting this state.")]
 		public FsmBool resetOnExit;
 
 		[Tooltip("Repeats every frame")]
 		public bool everyFrame;
 
-		private UnityEngine.UI.Text _text;
-		string _originalString;
+		private UnityEngine.UI.InputField _inputField;
+
+		float _originalValue;
 
 		public override void Reset()
 		{
 			gameObject = null;
-			text = null;
+			caretBlinkRate = null;
 			resetOnExit = null;
 			everyFrame = false;
 		}
@@ -42,15 +42,15 @@ namespace HutongGames.PlayMaker.Actions
 			GameObject _go = Fsm.GetOwnerDefaultTarget(gameObject);
 			if (_go!=null)
 			{
-				_text = _go.GetComponent<UnityEngine.UI.Text>();
+				_inputField = _go.GetComponent<UnityEngine.UI.InputField>();
 			}
 
 			if (resetOnExit.Value)
 			{
-				_originalString = _text.text;
+				_originalValue = _inputField.caretBlinkRate;
 			}
 
-			DoSetTextValue();
+			DoSetValue();
 			
 			if (!everyFrame)
 			{
@@ -60,28 +60,28 @@ namespace HutongGames.PlayMaker.Actions
 		
 		public override void OnUpdate()
 		{
-			DoSetTextValue();
+			DoSetValue();
 		}
 		
-		void DoSetTextValue()
+		void DoSetValue()
 		{
 
-			if (_text!=null)
+			if (_inputField!=null)
 			{
-				_text.text = text.Value;
+				_inputField.caretBlinkRate = caretBlinkRate.Value;
 			}
 		}
 
 		public override void OnExit()
 		{
-			if (_text==null)
+			if (_inputField==null)
 			{
 				return;
 			}
 			
 			if (resetOnExit.Value)
 			{
-				_text.text = _originalString;
+				_inputField.caretBlinkRate = _originalValue;
 			}
 		}
 	}

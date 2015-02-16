@@ -19,13 +19,6 @@ namespace HutongGames.PlayMaker.Actions
 		[UIHint(UIHint.TextArea)]
 		[Tooltip("The new color of the UGui Button component.")]
 		public FsmColor normalColor;
-		
-		
-		// MW this could be private: but in some cases it could be usefull to save the old value in a pm var or for debugging
-		// JFF: yes it should be private, else the user will use a getcolor action if he really wants it.
-		//[Tooltip("The former color of the UGui component.")]
-		//public FsmColor storedOldColor;
-		
 
 		[Tooltip("Reset when exiting this state.")]
 		public bool resetOnExit;
@@ -51,7 +44,6 @@ namespace HutongGames.PlayMaker.Actions
 		{
 			Initialize(Fsm.GetOwnerDefaultTarget(gameObject));
 
-			// jff: only save if we need to, Could do it in Initialize, but not really the right scope.
 			if (_Button!=null && resetOnExit)
 			{
 				_OriginalNormalColor = _Button.colors.normalColor;
