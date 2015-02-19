@@ -1,0 +1,9 @@
+{
+"__ECO__":"__SAMPLE__",
+"Unity Modules":["UI"],
+"Version":"1.0.0",
+"UnityMinimumVersion":"4.6.0",
+"PlayMakerMinimumVersion":"1.7.7",
+"unitypackage":"PlayMaker/Ecosystem/Custom Samples/uGui/uGuiTextFollowGameObject.unitypackage",
+"pingAssetPath":"Assets/PlayMaker Custom Samples/uGui/uGuiTextFollowGameObject.unity"
+}
