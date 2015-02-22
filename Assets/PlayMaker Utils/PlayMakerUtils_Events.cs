@@ -15,12 +15,22 @@ using HutongGames.PlayMaker;
 public partial class PlayMakerUtils {
 	
 
+	public static void SendEventToGameObject(PlayMakerFSM fromFsm,GameObject target,string fsmEvent,bool includeChildren)
+	{
+		SendEventToGameObject(fromFsm,target,fsmEvent,includeChildren,null);
+	}
+
 	public static void SendEventToGameObject(PlayMakerFSM fromFsm,GameObject target,string fsmEvent)
 	{
-		SendEventToGameObject(fromFsm,target,fsmEvent,null);
+		SendEventToGameObject(fromFsm,target,fsmEvent,false,null);
 	}
 
 	public static void SendEventToGameObject(PlayMakerFSM fromFsm,GameObject target,string fsmEvent,FsmEventData eventData)
+	{
+		SendEventToGameObject(fromFsm,target,fsmEvent,false,eventData);
+	}
+
+	public static void SendEventToGameObject(PlayMakerFSM fromFsm,GameObject target,string fsmEvent,bool includeChildren,FsmEventData eventData)
 	{
 		if (eventData!=null)
 		{
@@ -35,12 +45,12 @@ public partial class PlayMakerUtils {
 		owner.GameObject.Value = target;
 		_eventTarget.gameObject = owner;
 		_eventTarget.target = FsmEventTarget.EventTarget.GameObject;	
-			
-		_eventTarget.sendToChildren = false;
+		
+		_eventTarget.sendToChildren = includeChildren;
 		
 		fromFsm.Fsm.Event(_eventTarget,fsmEvent);
-
-
+		
+		
 	}
 
 

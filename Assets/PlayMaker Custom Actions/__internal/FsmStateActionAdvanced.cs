@@ -1,6 +1,4 @@
-// (c) Copyright HutongGames, LLC 2010-2014. All rights reserved.
-// ORIGINAL VERSION: 
-// https://github.com/jeanfabre/PlayMakerCustomActions_U3/tree/master/Assets/PlayMaker%20Custom%20Actions/__Internal
+// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
 
 using UnityEngine;
 
