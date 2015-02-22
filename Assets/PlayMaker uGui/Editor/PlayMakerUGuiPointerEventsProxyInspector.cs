@@ -5,11 +5,16 @@ using HutongGames.PlayMaker;
 
 using System.Collections;
 
+/// <summary>
+/// PlayMaker UGUI pointer events proxy inspector.
+/// This is only to remove the first script pointer field, which is totally unnecessary and takes vertical space in the editor
+/// </summary>
 [CustomEditor(typeof(PlayMakerUGuiPointerEventsProxy))]
 public class PlayMakerUGuiPointerEventsProxyInspector : Editor {
 	
 	public override void OnInspectorGUI()
 	{
+		serializedObject.UpdateIfDirtyOrScript();
 
 		SerializedProperty eventTarget = serializedObject.FindProperty("eventTarget");
 		EditorGUILayout.PropertyField(eventTarget);

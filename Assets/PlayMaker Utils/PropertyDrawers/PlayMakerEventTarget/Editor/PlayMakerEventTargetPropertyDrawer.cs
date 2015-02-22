@@ -9,9 +9,20 @@ using UnityEditor;
 
 namespace HutongGames.PlayMaker.Ecosystem.Utils
 {
+
 	[CustomPropertyDrawer (typeof (PlayMakerEventTarget))]
 	public class PlayMakerEventTargetDrawer : PlayMakerPropertyDrawerBaseClass 
 	{
+
+		/// <summary>
+		/// The row count. Computed and set by inheriting class
+		/// </summary>
+		int rowCount;
+
+		public override float GetPropertyHeight (SerializedProperty property, GUIContent label)
+		{
+			return base.GetPropertyHeight(property,label) * rowCount;
+		}
 
 		public override void OnGUI (Rect pos, SerializedProperty prop, GUIContent label) {
 
@@ -23,14 +34,13 @@ namespace HutongGames.PlayMaker.Ecosystem.Utils
 
 			CacheOwnerGameObject(prop.serializedObject);
 
-
 			int row = 0;
 
-			//
-			//
 			// draw the enum popup Field
 			int oldEnumIndex = eventTarget.enumValueIndex;
 
+			// force the GameObject value to be the owner when switching to it
+			// this is just to fall back nicely on a preset that is the expected one, as opposed to target nothing
 			if (oldEnumIndex==0 && gameObject.objectReferenceValue!=ownerGameObject)
 			{
 				gameObject.objectReferenceValue = ownerGameObject;
@@ -40,6 +50,7 @@ namespace HutongGames.PlayMaker.Ecosystem.Utils
 				GetRectforRow(pos,++row -1),
 				eventTarget,label,true);
 
+			// Properly set the GameObjectObject to the owner if this is the choice
 			if (oldEnumIndex !=eventTarget.enumValueIndex)
 			{
 				if (eventTarget.enumValueIndex==0)
@@ -48,8 +59,8 @@ namespace HutongGames.PlayMaker.Ecosystem.Utils
 				}
 			}
 
-			// Owner || broadcastALL don't require an additional field for the target definition
-			if (eventTarget.enumValueIndex==0)
+			// Additional fields
+			if (eventTarget.enumValueIndex==0) // targeting Owner: needs only the include children field
 			{
 				EditorGUI.indentLevel++;
 				if (eventTarget.enumValueIndex==0)
@@ -59,11 +70,10 @@ namespace HutongGames.PlayMaker.Ecosystem.Utils
 						includeChildren,new GUIContent("Include Children"),true);
 				}
 				EditorGUI.indentLevel--;
-			}else if(eventTarget.enumValueIndex==2)
+			}else if(eventTarget.enumValueIndex==2) // targeting Broadcasting: needs no additional fields
 			{
 				//nothing
-
-			}else{
+			}else{ // targeting GameObject or FsmComponent
 
 				EditorGUI.indentLevel++;
 
@@ -87,6 +97,13 @@ namespace HutongGames.PlayMaker.Ecosystem.Utils
 				EditorGUI.indentLevel--;
 			}
 
+			// attempt to refresh UI and avoid glitch
+			if (row!=rowCount)
+			{
+				prop.serializedObject.ApplyModifiedProperties();
+				prop.serializedObject.Update();
+			}
+			// update the rowCount to compute the right interface height
 			rowCount = row;
 		}
 

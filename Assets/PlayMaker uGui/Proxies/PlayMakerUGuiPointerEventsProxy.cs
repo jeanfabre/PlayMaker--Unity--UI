@@ -19,19 +19,24 @@ public class PlayMakerUGuiPointerEventsProxy : MonoBehaviour,
 	public PlayMakerEventTarget eventTarget;
 
 	[EventTargetVariable("eventTarget")]
-	public PlayMakerEvent onClickEvent;
+	[ShowOptions]
+	public PlayMakerEvent onClickEvent = new PlayMakerEvent("UGUI / ON POINTER CLICK");
 
 	[EventTargetVariable("eventTarget")]
-	public PlayMakerEvent onDownEvent;
+	[ShowOptions]
+	public PlayMakerEvent onDownEvent = new PlayMakerEvent("UGUI / ON POINTER DOWN");
 
 	[EventTargetVariable("eventTarget")]
-	public PlayMakerEvent onEnterEvent;
+	[ShowOptions]
+	public PlayMakerEvent onEnterEvent = new PlayMakerEvent("UGUI / ON POINTER ENTER");
 
 	[EventTargetVariable("eventTarget")]
-	public PlayMakerEvent onExitEvent;
+	[ShowOptions]
+	public PlayMakerEvent onExitEvent = new PlayMakerEvent("UGUI / ON POINTER EXIT");
 
 	[EventTargetVariable("eventTarget")]
-	public PlayMakerEvent onUpEvent;
+	[ShowOptions]
+	public PlayMakerEvent onUpEvent = new PlayMakerEvent("UGUI / ON POINTER UP");
 	
 	public void OnPointerClick (PointerEventData data) {
 		GetLastPointerDataInfo.lastPointeEventData = data;
@@ -53,4 +58,5 @@ public class PlayMakerUGuiPointerEventsProxy : MonoBehaviour,
 		GetLastPointerDataInfo.lastPointeEventData = data;
 		onUpEvent.SendEvent(PlayMakerUGuiSceneProxy.fsm,eventTarget);
 	}
+
 }

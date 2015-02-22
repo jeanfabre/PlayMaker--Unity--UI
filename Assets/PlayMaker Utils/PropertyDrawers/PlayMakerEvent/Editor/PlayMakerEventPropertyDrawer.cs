@@ -26,10 +26,7 @@ namespace HutongGames.PlayMaker.Ecosystem.Utils
 
 		bool showOptions;
 
-		string defaultEventName;
-
-
-		// these trhee property are external, and comes from the attribution of a PlayMakerEventTarget Variable via
+		// these three property are external, and comes from the attribution of a PlayMakerEventTarget Variable via
 		// the custom Attribute EventTargetVariable
 		// if no eventTarget is defined, then this EventDrawer will show Global Events
 		SerializedProperty eventTarget;
@@ -39,6 +36,19 @@ namespace HutongGames.PlayMaker.Ecosystem.Utils
 
 		SerializedProperty eventName;
 		SerializedProperty allowLocalEvents;
+		SerializedProperty defaultEventName;
+
+		string defaultEventNameValue;
+
+		/// <summary>
+		/// The row count. Computed and set by inheriting class
+		/// </summary>
+		int rowCount;
+		
+		public override float GetPropertyHeight (SerializedProperty property, GUIContent label)
+		{
+			return base.GetPropertyHeight(property,label) * (rowCount);
+		}
 
 		public override void OnGUI (Rect pos, SerializedProperty prop, GUIContent label) {
 
@@ -55,14 +65,6 @@ namespace HutongGames.PlayMaker.Ecosystem.Utils
 					eventTargetVariable = prop.serializedObject.FindProperty(variableName);
 				}
 
-				// check for EventTargetVariable Attribute
-				object[] _defaultEvents = this.fieldInfo.GetCustomAttributes(typeof(DefaultEvent),true);
-
-				if (_defaultEvents.Length>0)
-				{
-					defaultEventName = (_defaultEvents[0] as DefaultEvent).value;
-				}
-
 				/// check for the ShowOptions attribute
 				object[] _showOptions = this.fieldInfo.GetCustomAttributes(typeof(ShowOptions),true);
 				
@@ -71,6 +73,7 @@ namespace HutongGames.PlayMaker.Ecosystem.Utils
 					showOptions = true;
 				}
 			}
+
 
 			if (eventTargetVariable!=null)
 			{
@@ -82,8 +85,12 @@ namespace HutongGames.PlayMaker.Ecosystem.Utils
 
 			eventName = prop.FindPropertyRelative("eventName");
 			string _eventName = eventName.stringValue;
+
 			allowLocalEvents = prop.FindPropertyRelative("allowLocalEvents");
 			bool _allowEvent = allowLocalEvents.boolValue;
+
+			defaultEventName = prop.FindPropertyRelative("defaultEventName");
+			defaultEventNameValue = defaultEventName.stringValue;
 
 			CacheOwnerGameObject(prop.serializedObject);
 
@@ -117,19 +124,10 @@ namespace HutongGames.PlayMaker.Ecosystem.Utils
 			if (! string.IsNullOrEmpty(_eventName))
 			{
 				selected = ArrayUtility.IndexOf<string>(_eventList,_eventName);
-				/*
-				Debug.Log("<"+_eventName+"> ->"+selected);
-				if (selected==-1)
-				{
-					foreach(string item in _eventList)
-					{
-						Debug.Log(item);
-					}
-				}
-				*/
 			}
 
 			Rect _rect= GetRectforRow(pos,++row -1);
+
 			if(showOptions)
 			{
 				_rect.width -= 18;
@@ -137,9 +135,9 @@ namespace HutongGames.PlayMaker.Ecosystem.Utils
 
 			string _popupLabel = label.text;
 
-			//if(selected!=0)
-			//{
-				if (selected>0 && !isEventImplemented)
+			if(selected!=0 && eventTarget.enumValueIndex!=2) // not none and not broadcasting
+			{
+				if ((selected>0 && !isEventImplemented )|| selected ==-1)
 				{
 					//_popup = GUI.skin.GetStyle("ErrorLabel");
 					GUIStyle labelStyle = GUI.skin.GetStyle("controlLabel");
@@ -147,7 +145,7 @@ namespace HutongGames.PlayMaker.Ecosystem.Utils
 
 					_popupLabel = "<color=red>"+_popupLabel+"</color>";
 				}
-			//}
+			}
 			int newSelection = EditorGUI.Popup(
 				_rect,
 				_popupLabel,
@@ -155,33 +153,40 @@ namespace HutongGames.PlayMaker.Ecosystem.Utils
 				_eventList
 				);
 
+			
+			if (selected!=newSelection)
+			{
+				if (newSelection==0)
+				{
+					eventName.stringValue = "";
+				}else{
+					eventName.stringValue = _eventList[newSelection];
+				}
+				//eventName.serializedObject.ApplyModifiedProperties();
+			}
+
 			 _rect.x =_rect.xMax +2;
 			 _rect.width = 18;
 
 			if (selected ==-1)
 			{
-
 				EditorGUI.LabelField(
 					GetRectforRow(pos,++row -1),
 					"<color=red>missing event</color>",
 					"<color=red>"+_eventName+"</color>"
 					);
-					/*
-				GUI.Label(
-					GetRectforRow(pos,++row -1),
-					"<color=red>missing: "+_eventName+"</color>"
-					);
-					*/
 			}
 
-
-			if (selected>0 && !isEventImplemented)
+			if(selected!=0 && eventTarget.enumValueIndex!=2) // not none and not broadcasting
 			{
-				EditorGUI.LabelField(
-					GetRectforRow(pos,++row -1),
-					" ",
-					"<color=red>Not implemented on target</color>"
-					);
+				if (selected>0 && !isEventImplemented)
+				{
+					EditorGUI.LabelField(
+						GetRectforRow(pos,++row -1),
+						" ",
+						"<color=red>Not implemented on target</color>"
+						);
+				}
 			}
 
 
@@ -199,31 +204,25 @@ namespace HutongGames.PlayMaker.Ecosystem.Utils
 						menu.AddSeparator ("");
 					}
 
-					menu.AddItem(new GUIContent ("Reset to Default"), false, ResetToDefault);
+					menu.AddItem(new GUIContent ("Reset"), false, ResetToDefault);
 
 					menu.ShowAsContext ();
 				}
 
 			}
 
-			if (selected!=newSelection)
+			// attempt to refresh UI and avoid glitch
+			if (row!=rowCount)
 			{
-				if (newSelection==0)
-				{
-					eventName.stringValue = "";
-				}else{
-					eventName.stringValue = _eventList[newSelection];
-				}
-				eventName.serializedObject.ApplyModifiedProperties();
+				prop.serializedObject.ApplyModifiedProperties();
+				prop.serializedObject.Update();
 			}
-
-
 			rowCount = row;
 		}
 
 		void ResetToDefault()
 		{
-			eventName.stringValue = defaultEventName;
+			eventName.stringValue = defaultEventNameValue;
 			eventName.serializedObject.ApplyModifiedProperties();
 		}
 

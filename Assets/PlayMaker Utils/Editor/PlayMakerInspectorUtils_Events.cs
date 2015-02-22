@@ -20,6 +20,10 @@ namespace HutongGames.PlayMaker.Ecosystem.Utils
 
 		public static bool DoesTargetImplementsEvent(PlayMakerFSM fsm, string fsmEvent)
 		{
+			if (fsm==null)
+			{
+				return false;
+			}
 
 			foreach(FsmTransition _transition in fsm.FsmGlobalTransitions)
 			{
@@ -47,6 +51,11 @@ namespace HutongGames.PlayMaker.Ecosystem.Utils
 
 		public static bool DoesTargetImplementsEvent(GameObject target,string fsmEvent,bool includeChildren)
 		{
+			if (target==null)
+			{
+				return false;
+			}
+
 			PlayMakerFSM[] _list = includeChildren?target.GetComponentsInChildren<PlayMakerFSM>(true):target.GetComponents<PlayMakerFSM>();
 			foreach(PlayMakerFSM _fsm in _list)
 			{

@@ -8,7 +8,7 @@ namespace HutongGames.PlayMaker.Ecosystem.Utils
 	/// </summary>
 	public class PlayMakerPropertyDrawerBaseClass : PropertyDrawer {
 
-		protected int rowCount;
+
 
 		//protected int rowCount;
 		/// <summary>
@@ -26,12 +26,8 @@ namespace HutongGames.PlayMaker.Ecosystem.Utils
 				return _ownerGameObject;
 			}
 		}
+
 		GameObject _ownerGameObject;
-		
-		public override float GetPropertyHeight (SerializedProperty property, GUIContent label)
-		{
-			return rowCount*ControlHeight;
-		}
 
 		/// <summary>
 		/// Compute the Rect for a one line property field at a given row index.

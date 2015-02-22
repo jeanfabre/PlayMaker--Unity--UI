@@ -9,11 +9,17 @@ namespace HutongGames.PlayMaker.Ecosystem.Utils
 {
 
 	/// <summary>
-	/// Defines a PlayMaker Event and what is the target to send it.
-	/// Use this class in your Components public interface, The Unity Inspector will use a specific PropertyDrawer is defined
+	/// PlayMaker Event. Use this class in your Components public interface. The Unity Inspector will use the related PropertyDrawer.
+	/// It lets user easily choose a PlayMaker Event
+	/// 
+	/// If there is no attribute "EventTargetVariable" define, the list of events will be all the PlayMaker global events
+	/// 
+	/// If the attribute "EventTargetVariable" is defined, the PlayMakerEventTarget variable will be used for the context
+	///  the list of events will adapt, and warn the user if the selected event is indeed implemented on the target
 	/// </summary>
 	[Serializable]
 	public class PlayMakerEvent{
+
 
 		/// <summary>
 		/// The name of the event.
@@ -24,7 +30,21 @@ namespace HutongGames.PlayMaker.Ecosystem.Utils
 		/// Store here a user setting, instead of in the PropertyDrawer
 		/// Switch between showing global or local events to keep it as choosen by the user.
 		/// </summary>
-		public bool allowLocalEvents = false;
+		public bool allowLocalEvents;
+
+		/// <summary>
+		/// The default name of the event.
+		/// </summary>
+		public string defaultEventName;
+
+
+		public PlayMakerEvent(){}
+
+		public PlayMakerEvent(string defaultEventName)
+		{
+			this.defaultEventName = defaultEventName;
+			this.eventName = defaultEventName;
+		}
 
 		public bool SendEvent(PlayMakerFSM fromFsm,PlayMakerEventTarget eventTarget)
 		{

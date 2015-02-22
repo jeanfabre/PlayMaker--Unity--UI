@@ -10,22 +10,19 @@ using HutongGames.PlayMaker.Ecosystem.Utils;
 public class PlayMakerUGuiDragEventsProxy : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
 
-	public PlayMakerEventTarget eventTarget;
+	public PlayMakerEventTarget eventTarget = new PlayMakerEventTarget(true);
 
 	[EventTargetVariable("eventTarget")]
-	[DefaultEvent("UGUI / ON BEGIN DRAG")]
 	[ShowOptions]
-	public PlayMakerEvent onBeginDragEvent = new PlayMakerEvent();
+	public PlayMakerEvent onBeginDragEvent= new PlayMakerEvent("UGUI / ON BEGIN DRAG");
 
 	[EventTargetVariable("eventTarget")]
-	[DefaultEvent("UGUI / ON DRAG")]
 	[ShowOptions]
-	public PlayMakerEvent onDragEvent = new PlayMakerEvent();
+	public PlayMakerEvent onDragEvent = new PlayMakerEvent("UGUI / ON DRAG");
 
 	[EventTargetVariable("eventTarget")]
-	[DefaultEvent("UGUI / ON END DRAG")]
 	[ShowOptions]
-	public PlayMakerEvent onEndDragEvent = new PlayMakerEvent();
+	public PlayMakerEvent onEndDragEvent= new PlayMakerEvent("UGUI / ON END DRAG");
 	
 	public void OnBeginDrag (PointerEventData data) {
 		GetLastPointerDataInfo.lastPointeEventData = data;
@@ -41,4 +38,5 @@ public class PlayMakerUGuiDragEventsProxy : MonoBehaviour, IDragHandler, IBeginD
 		GetLastPointerDataInfo.lastPointeEventData = data;
 		onEndDragEvent.SendEvent(PlayMakerUGuiSceneProxy.fsm,eventTarget);
 	}
+
 }
