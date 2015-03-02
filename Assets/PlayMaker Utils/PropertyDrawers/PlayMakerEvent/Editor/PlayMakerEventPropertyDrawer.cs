@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
+using HutongGames.Editor;
 using HutongGames.PlayMakerEditor;
 
 namespace HutongGames.PlayMaker.Ecosystem.Utils
@@ -146,49 +147,34 @@ namespace HutongGames.PlayMaker.Ecosystem.Utils
 					_popupLabel = "<color=red>"+_popupLabel+"</color>";
 				}
 			}
-			int newSelection = EditorGUI.Popup(
-				_rect,
-				_popupLabel,
-				selected,
-				_eventList
-				);
 
-			
-			if (selected!=newSelection)
+			// Event Popup 
+			Rect _contentRect = EditorGUI.PrefixLabel(_rect,label);
+			//_contentRect.width -= 0;
+			if (GUI.Button(
+					_contentRect,
+					string.IsNullOrEmpty(_eventName)?"none":_eventName, 
+					EditorStyles.popup))
 			{
-				if (newSelection==0)
-				{
-					eventName.stringValue = "";
-				}else{
-					eventName.stringValue = _eventList[newSelection];
-				}
-				//eventName.serializedObject.ApplyModifiedProperties();
+				GenericMenu menu = GenerateEventMenu(_eventList,_eventName);
+				menu.DropDown(_rect);
+
 			}
 
-			 _rect.x =_rect.xMax +2;
-			 _rect.width = 18;
+			/*
+			 _rect.x =_rect.xMax-10;
+			 _rect.width = 10;
 
-			if (selected ==-1)
+			if (GUI.Button(_rect,"?","label"))
 			{
-				EditorGUI.LabelField(
-					GetRectforRow(pos,++row -1),
-					"<color=red>missing event</color>",
-					"<color=red>"+_eventName+"</color>"
-					);
+				//buttonRect.x += FsmEditor.Window.position.x + FsmEditor.Window.position.width - FsmEditor.InspectorPanelWidth;
+				//buttonRect.y += FsmEditor.Window.position.y + StateInspector.ActionsPanelRect.y + 3 - FsmEditor.StateInspector.scrollPosition.y;
+				//var newVariableWindow = PlayMakerEditor.  NewEventWindow.CreateDropdown("New Global Event", _contentRect, eventName);
+				//newVariableWindow.EditCommited += DoNewGlobalEvent;
 			}
-
-			if(selected!=0 && eventTarget.enumValueIndex!=2) // not none and not broadcasting
-			{
-				if (selected>0 && !isEventImplemented)
-				{
-					EditorGUI.LabelField(
-						GetRectforRow(pos,++row -1),
-						" ",
-						"<color=red>Not implemented on target</color>"
-						);
-				}
-			}
-
+*/
+			_rect.x =_rect.xMax +2 ;
+			_rect.width = 18;
 
 			if (showOptions)
 			{
@@ -210,6 +196,31 @@ namespace HutongGames.PlayMaker.Ecosystem.Utils
 				}
 
 			}
+
+			// feedback
+			if (selected ==-1)
+			{
+				EditorGUI.LabelField(
+					GetRectforRow(pos,++row -1),
+					"<color=red>missing event</color>",
+					"<color=red>"+_eventName+"</color>"
+					);
+			}
+			
+			if(selected!=0 && eventTarget.enumValueIndex!=2) // not none and not broadcasting
+			{
+				if (selected>0 && !isEventImplemented)
+				{
+					EditorGUI.LabelField(
+						GetRectforRow(pos,++row -1),
+						" ",
+						"<color=red>Not implemented on target</color>"
+						);
+				}
+			}
+
+
+
 
 			// attempt to refresh UI and avoid glitch
 			if (row!=rowCount)
@@ -236,5 +247,31 @@ namespace HutongGames.PlayMaker.Ecosystem.Utils
 
 		}
 
+		void EventMenuSelectionCallBack(object userdata)
+		{
+
+			if (userdata==null) // none
+			{
+				eventName.stringValue = "";
+			}else{
+				eventName.stringValue = (string)userdata;
+			}
+
+			eventName.serializedObject.ApplyModifiedProperties();
+		
+		}
+
+		GenericMenu GenerateEventMenu(string[] _eventList,string currentSelection)
+		{
+			var menu = new GenericMenu();
+			menu.AddItem(new GUIContent("none"), currentSelection.Equals("none"), EventMenuSelectionCallBack, null);
+	
+			foreach(string _event in _eventList)
+			{
+				menu.AddItem(new GUIContent(_event), currentSelection.Equals(_event), EventMenuSelectionCallBack,_event);
+			}
+
+			return menu;
+		}
 	}
 }
