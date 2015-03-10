@@ -16,6 +16,8 @@ public class PlayMakerUGuiPointerEventsProxy : MonoBehaviour,
 				IPointerUpHandler
 {
 
+	public bool debug = false;
+
 	public PlayMakerEventTarget eventTarget;
 
 	[EventTargetVariable("eventTarget")]
@@ -39,22 +41,51 @@ public class PlayMakerUGuiPointerEventsProxy : MonoBehaviour,
 	public PlayMakerEvent onUpEvent = new PlayMakerEvent("UGUI / ON POINTER UP");
 	
 	public void OnPointerClick (PointerEventData data) {
+		if (debug)
+		{
+			UnityEngine.Debug.Log("OnPointerClick "+data.pointerId+" on "+this.gameObject.name);
+		}
+
 		GetLastPointerDataInfo.lastPointeEventData = data;
 		onClickEvent.SendEvent(PlayMakerUGuiSceneProxy.fsm,eventTarget);
 	}
+
 	public void OnPointerDown (PointerEventData data) {
+		if (debug)
+		{
+			UnityEngine.Debug.Log("OnPointerDown "+data.pointerId+" on "+this.gameObject.name);
+		}
+
 		GetLastPointerDataInfo.lastPointeEventData = data;
 		onDownEvent.SendEvent(PlayMakerUGuiSceneProxy.fsm,eventTarget);
 	}
+
 	public void OnPointerEnter (PointerEventData data) {
+		if (debug)
+		{
+			UnityEngine.Debug.Log("OnPointerEnter "+data.pointerId+" on "+this.gameObject.name);
+		}
+
 		GetLastPointerDataInfo.lastPointeEventData = data;
 		onEnterEvent.SendEvent(PlayMakerUGuiSceneProxy.fsm,eventTarget);
 	}
+
 	public void OnPointerExit (PointerEventData data) {
+		if (debug)
+		{
+			UnityEngine.Debug.Log("OnPointerExit "+data.pointerId+" on "+this.gameObject.name);
+		}
+
 		GetLastPointerDataInfo.lastPointeEventData = data;
 		onExitEvent.SendEvent(PlayMakerUGuiSceneProxy.fsm,eventTarget);
 	}
+
 	public void OnPointerUp (PointerEventData data) {
+		if (debug)
+		{
+			UnityEngine.Debug.Log("OnPointerUp "+data.pointerId+" on "+this.gameObject.name);
+		}
+
 		GetLastPointerDataInfo.lastPointeEventData = data;
 		onUpEvent.SendEvent(PlayMakerUGuiSceneProxy.fsm,eventTarget);
 	}

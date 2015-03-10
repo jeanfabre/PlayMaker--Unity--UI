@@ -16,6 +16,9 @@ public class PlayMakerUGuiPointerEventsProxyInspector : Editor {
 	{
 		serializedObject.UpdateIfDirtyOrScript();
 
+		SerializedProperty debug = serializedObject.FindProperty("debug");
+		EditorGUILayout.PropertyField(debug);
+
 		SerializedProperty eventTarget = serializedObject.FindProperty("eventTarget");
 		EditorGUILayout.PropertyField(eventTarget);
 
