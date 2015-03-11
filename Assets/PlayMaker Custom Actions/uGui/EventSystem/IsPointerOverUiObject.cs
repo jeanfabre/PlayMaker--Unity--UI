@@ -58,7 +58,17 @@ namespace HutongGames.PlayMaker.Actions
 			{
 				EventSystem.current.IsPointerOverGameObject();
 			}else{
-				EventSystem.current.IsPointerOverGameObject(pointerId.Value);
+
+				if(EventSystem.current.currentInputModule is PointerInputModule) {
+				
+					PointerInputModule _module = EventSystem.current.currentInputModule as PointerInputModule;
+
+				}
+
+				if (EventSystem.current.currentInputModule!=null)
+				{
+					EventSystem.current.currentInputModule.IsPointerOverGameObject(pointerId.Value);
+				}
 			}
 
 			isPointerOverUI.Value = isOver;
