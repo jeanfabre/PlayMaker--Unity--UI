@@ -41,7 +41,6 @@ namespace HutongGames.PlayMaker.Actions
 				LogError("Missing GameObject ");
 			}
 
-			Finish();
 		}
 
 		public override void OnExit()
