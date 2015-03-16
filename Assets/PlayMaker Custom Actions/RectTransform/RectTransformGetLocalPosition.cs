@@ -13,27 +13,34 @@ using UnityEngine;
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory("RectTransform")]
-	[Tooltip("Get the position of the pivot of this RectTransform relative to the anchor reference point.")]
-	public class RectTransformGetAnchoredPosition : FsmStateActionAdvanced
+	[Tooltip("Get the Local position of this RectTransform.")]
+	public class RectTransformGetLocalPosition : FsmStateActionAdvanced
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(RectTransform))]
 		[Tooltip("The GameObject target.")]
 		public FsmOwnerDefault gameObject;
-		
-		[Tooltip("The anchored Position")]
-		[UIHint(UIHint.Variable)]
-		public FsmVector2 position;
 
-		[Tooltip("The x component of the anchored Position")]
+		[Tooltip("The position")]
+		[UIHint(UIHint.Variable)]
+		public FsmVector3 position;
+
+		[Tooltip("The position in a Vector 2d ")]
+		[UIHint(UIHint.Variable)]
+		public FsmVector2 position2d;
+		
+		[Tooltip("The x component of the Position")]
 		[UIHint(UIHint.Variable)]
 		public FsmFloat x;
-
-		[Tooltip("The y component of the anchored Position")]
+		
+		[Tooltip("The y component of the Position")]
 		[UIHint(UIHint.Variable)]
 		public FsmFloat y;
+
+		[Tooltip("The z component of the Position")]
+		[UIHint(UIHint.Variable)]
+		public FsmFloat z;
 		
-	
 		RectTransform _rt;
 		
 		public override void Reset()
@@ -41,9 +48,10 @@ namespace HutongGames.PlayMaker.Actions
 			base.Reset();
 			gameObject = null;
 			position = null;
+			position2d = null;
 			x = null;
 			y = null;
-			
+			z = null;
 		}
 		
 		public override void OnEnter()
@@ -69,10 +77,20 @@ namespace HutongGames.PlayMaker.Actions
 		
 		void DoGetValues()
 		{
+			if (_rt==null)
+			{
+				return;
+			}
 
-			if (!position.IsNone) position.Value = _rt.anchoredPosition;
-			if (!x.IsNone) x.Value = _rt.anchoredPosition.x;
-			if (!y.IsNone) y.Value = _rt.anchoredPosition.y;
+			Vector3 _pos = _rt.localPosition;
+
+			if (!position.IsNone) position.Value = _pos;
+
+			if (!position2d.IsNone) position.Value = new Vector2(_pos.x,_pos.y);
+
+			if (!x.IsNone) x.Value = _pos.x;
+			if (!y.IsNone) y.Value = _pos.y;
+			if (!z.IsNone) z.Value = _pos.z;
 		}
 	}
 }
