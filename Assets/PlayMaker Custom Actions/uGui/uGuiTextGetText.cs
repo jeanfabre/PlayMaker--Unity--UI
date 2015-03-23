@@ -6,51 +6,40 @@ using UnityEngine;
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory("uGui")]
-	[Tooltip("Sets the text value of a UGui Text component.")]
-	public class uGuiSetText : FsmStateAction
+	[Tooltip("Gets the text value of a UGui Text component.")]
+	public class uGuiTextGetText : FsmStateAction
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(UnityEngine.UI.Text))]
 		[Tooltip("The GameObject with the text ui component.")]
 		public FsmOwnerDefault gameObject;
-
+		
 		[RequiredField]
-		[UIHint(UIHint.TextArea)]
-		[Tooltip("The text of the UGui Text component.")]
+		[UIHint(UIHint.Variable)]
+		[Tooltip("The text value of the UGui Text component.")]
 		public FsmString text;
 
-		[Tooltip("Reset when exiting this state.")]
-		public FsmBool resetOnExit;
-
-		[Tooltip("Repeats every frame")]
+		[Tooltip("Runs everyframe. Useful to animate values over time.")]
 		public bool everyFrame;
-
+		
 		private UnityEngine.UI.Text _text;
-		string _originalString;
-
+		
 		public override void Reset()
 		{
-			gameObject = null;
 			text = null;
-			resetOnExit = null;
 			everyFrame = false;
 		}
 		
 		public override void OnEnter()
 		{
-
+			
 			GameObject _go = Fsm.GetOwnerDefaultTarget(gameObject);
 			if (_go!=null)
 			{
 				_text = _go.GetComponent<UnityEngine.UI.Text>();
 			}
-
-			if (resetOnExit.Value)
-			{
-				_originalString = _text.text;
-			}
-
-			DoSetTextValue();
+			
+			DoGetTextValue();
 			
 			if (!everyFrame)
 			{
@@ -60,29 +49,16 @@ namespace HutongGames.PlayMaker.Actions
 		
 		public override void OnUpdate()
 		{
-			DoSetTextValue();
+			DoGetTextValue();
 		}
 		
-		void DoSetTextValue()
+		void DoGetTextValue()
 		{
-
 			if (_text!=null)
 			{
-				_text.text = text.Value;
+				text.Value = _text.text;
 			}
 		}
-
-		public override void OnExit()
-		{
-			if (_text==null)
-			{
-				return;
-			}
-			
-			if (resetOnExit.Value)
-			{
-				_text.text = _originalString;
-			}
-		}
+		
 	}
 }

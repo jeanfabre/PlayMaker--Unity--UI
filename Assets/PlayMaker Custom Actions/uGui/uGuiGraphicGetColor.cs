@@ -7,7 +7,7 @@ namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory("uGui")]
 	[Tooltip("Gets the color of a UGui graphic component.")]
-	public class uGuiGetGraphicColor : FsmStateAction
+	public class uGuiGraphicGetColor : FsmStateAction
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(UnityEngine.UI.Graphic))]

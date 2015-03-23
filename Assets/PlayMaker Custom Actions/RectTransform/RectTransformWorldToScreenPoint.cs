@@ -12,7 +12,7 @@ using UnityEngine;
 
 namespace HutongGames.PlayMaker.Actions
 {
-	[ActionCategory(ActionCategory.Camera)]
+	[ActionCategory("RectTransform")]
 	[Tooltip("RectTransforms position from world space into screen space. Leave the camera to none for default behavior")]
 	public class RectTransformWorldToScreenPoint : FsmStateActionAdvanced
 	{

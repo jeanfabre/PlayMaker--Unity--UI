@@ -13,7 +13,7 @@ using UnityEngine;
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory("RectTransform")]
-	[Tooltip("Get the Local position of this RectTransform.")]
+	[Tooltip("Get the Local position of this RectTransform. This is Screen Space values using the anchoring as reference, so 0,0 is the center of the screen if the anchor is te center of the screen.")]
 	public class RectTransformGetLocalPosition : FsmStateActionAdvanced
 	{
 		[RequiredField]
