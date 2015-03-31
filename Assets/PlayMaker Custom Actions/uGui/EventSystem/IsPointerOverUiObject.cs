@@ -1,4 +1,5 @@
-﻿// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+﻿// (c) Copyright HutongGames, LLC 2010-2015. All rights reserved.
+//--- __ECO__ __ACTION__ ---//
 
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -56,19 +57,15 @@ namespace HutongGames.PlayMaker.Actions
 
 			if (pointerId.IsNone)
 			{
-				EventSystem.current.IsPointerOverGameObject();
+				isOver = EventSystem.current.IsPointerOverGameObject();
 			}else{
 
 				if(EventSystem.current.currentInputModule is PointerInputModule) {
 				
 					PointerInputModule _module = EventSystem.current.currentInputModule as PointerInputModule;
-
+					isOver = _module.IsPointerOverGameObject(pointerId.Value);
 				}
 
-				if (EventSystem.current.currentInputModule!=null)
-				{
-					EventSystem.current.currentInputModule.IsPointerOverGameObject(pointerId.Value);
-				}
 			}
 
 			isPointerOverUI.Value = isOver;
