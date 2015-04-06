@@ -23,10 +23,13 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("The GameObject target.")]
 		public FsmOwnerDefault gameObject;
 
-		[Tooltip("Use a stored Vector2 position, and/or set individual axis below.")]
+		[Tooltip("The Vector2 position. Set to none for no effect, and/or set individual axis below. ")]
 		public FsmVector2 position;
-		
+
+		[Tooltip("Setting only the x value. Overides position x value if set. Set to none for no effect")]
 		public FsmFloat x;
+
+		[Tooltip("Setting only the y value. Overides position x value if set. Set to none for no effect")]
 		public FsmFloat y;
 		
 
@@ -68,15 +71,18 @@ namespace HutongGames.PlayMaker.Actions
 		void DoSetAnchoredPosition()
 		{
 			// init position	
-			Vector2 _position = position.Value;
+			Vector2 _position = _rt.anchoredPosition;
+
+			if (!position.IsNone)
+			{
+				_position = position.Value;
+			}
 
 			// override any axis
-			
 			if (!x.IsNone) _position.x = x.Value;
 			if (!y.IsNone) _position.y = y.Value;
 			
 			// apply
-
 			_rt.anchoredPosition = _position;
 		}
 	}

@@ -21,10 +21,13 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("The GameObject target.")]
 		public FsmOwnerDefault gameObject;
 
-		[Tooltip("Use a stored Vector2 position, and/or set individual axis below.")]
+		[Tooltip("The Vector2 offsetMax. Set to none for no effect, and/or set individual axis below.")]
 		public FsmVector2 offsetMax;
-		
+
+		[Tooltip("Setting only the x value. Overides offsetMax x value if set. Set to none for no effect")]
 		public FsmFloat x;
+
+		[Tooltip("Setting only the y value. Overides offsetMax y value if set. Set to none for no effect")]
 		public FsmFloat y;
 		
 		
@@ -66,15 +69,17 @@ namespace HutongGames.PlayMaker.Actions
 		void DoSetOffsetMax()
 		{
 			// init position	
-			Vector2 _offset = offsetMax.Value;
-			
+			Vector2 _offset = _rt.offsetMax;
+
+			if (!offsetMax.IsNone)
+			{
+				_offset = offsetMax.Value;
+			}
 			// override any axis
-			
 			if (!x.IsNone) _offset.x = x.Value;
 			if (!y.IsNone) _offset.y = y.Value;
 			
 			// apply
-			
 			_rt.offsetMax = _offset;
 		}
 	}

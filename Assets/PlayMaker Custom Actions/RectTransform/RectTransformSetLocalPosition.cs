@@ -13,16 +13,19 @@ using UnityEngine;
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory("RectTransform")]
-	[Tooltip("Set the local rotation of this RectTransform.")]
-	public class RectTransformSetLocalRotation : FsmStateActionAdvanced
+	[Tooltip("Set the local position of this RectTransform.")]
+	public class RectTransformSetLocalPosition : FsmStateActionAdvanced
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(RectTransform))]
 		[Tooltip("The GameObject target.")]
 		public FsmOwnerDefault gameObject;
 
-		[Tooltip("The rotation. Set to none for no effect")]
-		public FsmVector3 rotation;
+		[Tooltip("The position. Set to none for no effect")]
+		public FsmVector2 position2d;
+
+		[Tooltip("Or the 3d position. Set to none for no effect")]
+		public FsmVector3 position;
 		
 		[Tooltip("The x component of the rotation. Set to none for no effect")]
 		public FsmFloat x;
@@ -39,7 +42,8 @@ namespace HutongGames.PlayMaker.Actions
 		{
 			base.Reset();
 			gameObject = null;
-			rotation = new FsmVector3(){UseVariable=true};
+			position2d  = new FsmVector2(){UseVariable=true};
+			position = new FsmVector3(){UseVariable=true};
 			x = new FsmFloat(){UseVariable=true};
 			y = new FsmFloat(){UseVariable=true};
 			z = new FsmFloat(){UseVariable=true};
@@ -73,15 +77,21 @@ namespace HutongGames.PlayMaker.Actions
 				return;
 			}
 
-			Vector3 _rot = _rt.eulerAngles;
+			Vector3 _pos = _rt.localPosition;
 
-			if (!rotation.IsNone) _rot = rotation.Value;
+			if (!position.IsNone) _pos = position.Value;
 
-			if (!x.IsNone) _rot.x = x.Value;
-			if (!y.IsNone) _rot.y = y.Value;
-			if (!z.IsNone) _rot.z = z.Value;
+			if (!position2d.IsNone)
+			{
+				_pos.x = position2d.Value.x;
+				_pos.y = position2d.Value.y;
+			}
 
-			_rt.eulerAngles = _rot;
+			if (!x.IsNone) _pos.x = x.Value;
+			if (!y.IsNone) _pos.y = y.Value;
+			if (!z.IsNone) _pos.z = z.Value;
+
+			_rt.localPosition = _pos;
 
 		}
 	}

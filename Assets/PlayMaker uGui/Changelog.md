@@ -3,6 +3,8 @@
 ###1.1.1
 **New**  
 - new get/set local position and rotation for RectTransform  
+- new Drop proxy
+- new sample Drag and Drop
 
 
 **Fix**  
@@ -11,7 +13,8 @@
 
 **Improvement**  
 - publishing alternative package with all ugui actions 
-- renamed few actions to keep consistency 
+- renamed few actions to keep consistency  
+- added sentByGameObject for Proxy events
 
 ###1.1.0
 

@@ -16,10 +16,15 @@ namespace HutongGames.PlayMaker.Actions
 	[Tooltip("Get the Local position of this RectTransform. This is Screen Space values using the anchoring as reference, so 0,0 is the center of the screen if the anchor is te center of the screen.")]
 	public class RectTransformGetLocalPosition : FsmStateActionAdvanced
 	{
+
+		public enum LocalPositionReference {Anchor,CenterPosition};
+
 		[RequiredField]
 		[CheckForComponent(typeof(RectTransform))]
 		[Tooltip("The GameObject target.")]
 		public FsmOwnerDefault gameObject;
+
+		public LocalPositionReference reference;
 
 		[Tooltip("The position")]
 		[UIHint(UIHint.Variable)]
@@ -47,6 +52,7 @@ namespace HutongGames.PlayMaker.Actions
 		{
 			base.Reset();
 			gameObject = null;
+			reference = LocalPositionReference.Anchor;
 			position = null;
 			position2d = null;
 			x = null;
@@ -84,9 +90,15 @@ namespace HutongGames.PlayMaker.Actions
 
 			Vector3 _pos = _rt.localPosition;
 
+			if (reference == LocalPositionReference.CenterPosition)
+			{
+				_pos.x += _rt.rect.center.x;
+				_pos.y += _rt.rect.center.y;
+			}
+
 			if (!position.IsNone) position.Value = _pos;
 
-			if (!position2d.IsNone) position.Value = new Vector2(_pos.x,_pos.y);
+			if (!position2d.IsNone) position2d.Value = new Vector2(_pos.x,_pos.y);
 
 			if (!x.IsNone) x.Value = _pos.x;
 			if (!y.IsNone) y.Value = _pos.y;

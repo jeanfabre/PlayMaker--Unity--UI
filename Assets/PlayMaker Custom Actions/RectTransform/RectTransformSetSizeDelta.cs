@@ -21,10 +21,13 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("The GameObject target.")]
 		public FsmOwnerDefault gameObject;
 
-		[Tooltip("Use a stored Vector2 position, and/or set individual axis below.")]
+		[Tooltip("TheVector2 sizeDelta. Set to none for no effect, and/or set individual axis below.")]
 		public FsmVector2 sizeDelta;
-		
+
+		[Tooltip("Setting only the x value. Overides sizeDelta x value if set. Set to none for no effect")]
 		public FsmFloat x;
+
+		[Tooltip("Setting only the x value. Overides sizeDelta y value if set. Set to none for no effect")]
 		public FsmFloat y;
 		
 		
@@ -66,15 +69,18 @@ namespace HutongGames.PlayMaker.Actions
 		void DoSetSizeDelta()
 		{
 			// init position	
-			Vector2 _sizeDelta = sizeDelta.Value;
-			
+			Vector2 _sizeDelta = _rt.sizeDelta;
+
+			if (!sizeDelta.IsNone)
+			{
+				_sizeDelta = sizeDelta.Value;
+			}
+
 			// override any axis
-			
 			if (!x.IsNone) _sizeDelta.x = x.Value;
 			if (!y.IsNone) _sizeDelta.y = y.Value;
 			
 			// apply
-			
 			_rt.sizeDelta = _sizeDelta;
 		}
 	}

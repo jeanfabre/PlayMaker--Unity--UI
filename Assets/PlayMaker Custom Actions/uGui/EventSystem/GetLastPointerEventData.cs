@@ -14,7 +14,6 @@ namespace HutongGames.PlayMaker.Actions
 
 		public static PointerEventData lastPointeEventData;
 
-
 		[UIHint(UIHint.Variable)]
 		public FsmInt clickCount;
 

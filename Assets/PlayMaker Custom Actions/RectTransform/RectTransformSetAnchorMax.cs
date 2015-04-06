@@ -13,7 +13,7 @@ using UnityEngine;
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory("RectTransform")]
-	[Tooltip("The normalized position in the parent RectTransform that the upper right corner is anchored to.")]
+	[Tooltip("The normalized position in the parent RectTransform that the upper right corner is anchored to. This is relative screen space, values ranges from 0 to 1")]
 	public class RectTransformSetAnchorMax : FsmStateActionAdvanced
 	{
 		[RequiredField]
@@ -21,12 +21,15 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("The GameObject target.")]
 		public FsmOwnerDefault gameObject;
 
-		[Tooltip("Use a stored Vector2 position, and/or set individual axis below.")]
+		[Tooltip("The Vector2 anchor. Set to none for no effect, and/or set individual axis below.")]
 		public FsmVector2 anchorMax;
 		
 		[HasFloatSlider(0f,1f)]
+		[Tooltip("Setting only the x value. Overides anchorMax x value if set. Set to none for no effect")]
 		public FsmFloat x;
+
 		[HasFloatSlider(0f,1f)]
+		[Tooltip("Setting only the x value. Overides anchorMax x value if set. Set to none for no effect")]
 		public FsmFloat y;
 		
 		
@@ -68,15 +71,18 @@ namespace HutongGames.PlayMaker.Actions
 		void DoSetAnchorMax()
 		{
 			// init position	
-			Vector2 _anchor = anchorMax.Value;
+			Vector2 _anchor = _rt.anchorMax;
+
+			if (!anchorMax.IsNone)
+			{
+				_anchor = anchorMax.Value;
+			}
 			
 			// override any axis
-			
 			if (!x.IsNone) _anchor.x = x.Value;
 			if (!y.IsNone) _anchor.y = y.Value;
 			
 			// apply
-			
 			_rt.anchorMax = _anchor;
 		}
 	}

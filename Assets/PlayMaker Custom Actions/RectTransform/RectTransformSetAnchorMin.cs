@@ -13,7 +13,7 @@ using UnityEngine;
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory("RectTransform")]
-	[Tooltip("The normalized position in the parent RectTransform that the lower left corner is anchored to.")]
+	[Tooltip("The normalized position in the parent RectTransform that the lower left corner is anchored to. This is relative screen space, values ranges from 0 to 1")]
 	public class RectTransformSetAnchorMin : FsmStateActionAdvanced
 	{
 		[RequiredField]
@@ -21,12 +21,15 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("The GameObject target.")]
 		public FsmOwnerDefault gameObject;
 
-		[Tooltip("Use a stored Vector2 position, and/or set individual axis below.")]
+		[Tooltip("The Vector2 anchor. Set to none for no effect, and/or set individual axis below.")]
 		public FsmVector2 anchorMin;
 		
 		[HasFloatSlider(0f,1f)]
+		[Tooltip("Setting only the x value. Overides anchorMin x value if set. Set to none for no effect")]
 		public FsmFloat x;
+
 		[HasFloatSlider(0f,1f)]
+		[Tooltip("Setting only the x value. Overides anchorMin x value if set. Set to none for no effect")]
 		public FsmFloat y;
 		
 		
@@ -68,15 +71,18 @@ namespace HutongGames.PlayMaker.Actions
 		void DoSetAnchorMin()
 		{
 			// init position	
-			Vector2 _anchor = anchorMin.Value;
-			
+			Vector2 _anchor = _rt.anchorMin;
+
+			if (!anchorMin.IsNone)
+			{
+				_anchor = anchorMin.Value;
+			}
+
 			// override any axis
-			
 			if (!x.IsNone) _anchor.x = x.Value;
 			if (!y.IsNone) _anchor.y = y.Value;
 			
 			// apply
-			
 			_rt.anchorMin = _anchor;
 		}
 	}

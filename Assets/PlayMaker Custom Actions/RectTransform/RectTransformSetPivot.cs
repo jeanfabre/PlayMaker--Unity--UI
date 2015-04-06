@@ -21,12 +21,15 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("The GameObject target.")]
 		public FsmOwnerDefault gameObject;
 
-		[Tooltip("Use a stored Vector2 position, and/or set individual axis below.")]
+		[Tooltip("The Vector2 pivot. Set to none for no effect, and/or set individual axis below.")]
 		public FsmVector2 pivot;
 
 		[HasFloatSlider(0f,1f)]
+		[Tooltip("Setting only the x value. Overides pivot x value if set. Set to none for no effect")]
 		public FsmFloat x;
+
 		[HasFloatSlider(0f,1f)]
+		[Tooltip("Setting only the x value. Overides pivot y value if set. Set to none for no effect")]
 		public FsmFloat y;
 		
 
@@ -68,16 +71,20 @@ namespace HutongGames.PlayMaker.Actions
 		void DoSetPivotPosition()
 		{
 			// init position	
-			Vector2 _position = pivot.Value;
-			
+			Vector2 _pivot = _rt.pivot;
+
+			if (!pivot.IsNone)
+			{
+				_pivot = pivot.Value;
+			}
 			// override any axis
 			
-			if (!x.IsNone) _position.x = x.Value;
-			if (!y.IsNone) _position.y = y.Value;
+			if (!x.IsNone) _pivot.x = x.Value;
+			if (!y.IsNone) _pivot.y = y.Value;
 			
 			// apply
 
-			_rt.pivot = _position;
+			_rt.pivot = _pivot;
 		}
 	}
 }

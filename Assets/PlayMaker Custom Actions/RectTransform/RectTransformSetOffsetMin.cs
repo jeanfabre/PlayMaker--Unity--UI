@@ -21,10 +21,13 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("The GameObject target.")]
 		public FsmOwnerDefault gameObject;
 
-		[Tooltip("Use a stored Vector2 position, and/or set individual axis below.")]
+		[Tooltip("The Vector2 offsetMin. Set to none for no effect, and/or set individual axis below.")]
 		public FsmVector2 offsetMin;
-		
+
+		[Tooltip("Setting only the x value. Overides offsetMin x value if set. Set to none for no effect")]
 		public FsmFloat x;
+
+		[Tooltip("Setting only the x value. Overides offsetMin y value if set. Set to none for no effect")]
 		public FsmFloat y;
 		
 		
@@ -66,15 +69,17 @@ namespace HutongGames.PlayMaker.Actions
 		void DoSetOffsetMin()
 		{
 			// init position	
-			Vector2 _offset = offsetMin.Value;
-			
+			Vector2 _offset = _rt.offsetMin;
+
+			if (!offsetMin.IsNone)
+			{
+				_offset = offsetMin.Value;
+			}
 			// override any axis
-			
 			if (!x.IsNone) _offset.x = x.Value;
 			if (!y.IsNone) _offset.y = y.Value;
 			
 			// apply
-			
 			_rt.offsetMin = _offset;
 		}
 	}

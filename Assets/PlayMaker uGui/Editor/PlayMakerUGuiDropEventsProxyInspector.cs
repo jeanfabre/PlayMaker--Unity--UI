@@ -6,11 +6,11 @@ using HutongGames.PlayMaker;
 using System.Collections;
 
 /// <summary>
-/// PlayMaker UGUI pointer Drag proxy inspector.
+/// PlayMaker UGUI Drop events proxy inspector.
 /// This is only to remove the first script pointer field, which is totally unnecessary and takes vertical space in the editor
 /// </summary>
-[CustomEditor(typeof(PlayMakerUGuiDragEventsProxy))]
-public class PlayMakerUGuiDragEventsProxyInspector : Editor {
+[CustomEditor(typeof(PlayMakerUGuiDropEventsProxy))]
+public class PlayMakerUGuiDropEventsProxyInspector : Editor {
 	
 	public override void OnInspectorGUI()
 	{
@@ -22,14 +22,8 @@ public class PlayMakerUGuiDragEventsProxyInspector : Editor {
 		SerializedProperty eventTarget = serializedObject.FindProperty("eventTarget");
 		EditorGUILayout.PropertyField(eventTarget);
 
-		SerializedProperty onBeginDragEvent = serializedObject.FindProperty("onBeginDragEvent");
-		EditorGUILayout.PropertyField(onBeginDragEvent);
-
-		SerializedProperty onDragEvent = serializedObject.FindProperty("onDragEvent");
-		EditorGUILayout.PropertyField(onDragEvent);
-
-		SerializedProperty onEndDragEvent = serializedObject.FindProperty("onEndDragEvent");
-		EditorGUILayout.PropertyField(onEndDragEvent);
+		SerializedProperty onDropEvent = serializedObject.FindProperty("onDropEvent");
+		EditorGUILayout.PropertyField(onDropEvent);
 
 		serializedObject.ApplyModifiedProperties();
 	}
