@@ -1,5 +1,5 @@
 ﻿// (c) Copyright HutongGames, LLC 2010-2015. All rights reserved.
-//--- __ECO__ __ACTION__ ---//
+// REMOVED ECOSYSTEM FLAG TO AVOID DUPLICATES IN ECOSYSTEM BROWSER, AS IT SEARCHED THIS REP AS WELL
 
 using UnityEngine;
 

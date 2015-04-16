@@ -1,11 +1,12 @@
-// (c) copyright Hutong Games, LLC 2010-2015. All rights reserved.
+// (c) Copyright HutongGames, LLC 2010-2015. All rights reserved.
+// REMOVED ECOSYSTEM FLAG TO AVOID DUPLICATES IN ECOSYSTEM BROWSER, AS IT SEARCHED THIS REP AS WELL
 
 using UnityEngine;
 
 namespace HutongGames.PlayMaker.Actions
 {
     [ActionCategory(ActionCategory.StateMachine)]
-    [Tooltip("Creates an FSM from a saved FSM Template. Let's you define the template at run time via a FsmObject Variable.")]
+    [Tooltip("Creates an FSM from a saved FSM Template. Let's you define the template at run time via a FsmObject Variable. Unlike RunFSM, you can't assign variables, simply send event to this running fsm instead.")]
     public class RunTemplateFSM : FsmStateAction
     {
 		[RequiredField]
@@ -33,19 +34,6 @@ namespace HutongGames.PlayMaker.Actions
         }
 
         /// <summary>
-        /// Initialize FSM on awake so it doesn't cause hitches later
-        /// </summary>
-        public override void Awake()
-        {
-			fsmTemplateControl.fsmTemplate = (FsmTemplate)template.Value;
-
-            if (fsmTemplateControl.fsmTemplate != null && Application.isPlaying)
-            {
-                runFsm = Fsm.CreateSubFsm(fsmTemplateControl);
-            }
-        }
-
-        /// <summary>
         /// Forward global events to the sub FSM
         /// </summary>
         public override bool Event(FsmEvent fsmEvent)
@@ -63,14 +51,18 @@ namespace HutongGames.PlayMaker.Actions
         /// </summary>
         public override void OnEnter()
         {
+			fsmTemplateControl.fsmTemplate = (FsmTemplate) template.Value;
+			
+			if (fsmTemplateControl.fsmTemplate != null)
+			{
+				runFsm = Fsm.CreateSubFsm(fsmTemplateControl);
+			}
+
             if (runFsm == null)
             {
                 Finish();
                 return;
             }
-
-            fsmTemplateControl.UpdateValues();
-            fsmTemplateControl.ApplyOverrides(runFsm);
 
             runFsm.OnEnable();
 
