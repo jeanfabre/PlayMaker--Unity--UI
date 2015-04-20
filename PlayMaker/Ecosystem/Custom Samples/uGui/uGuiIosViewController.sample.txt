@@ -1,0 +1,9 @@
+{
+"__ECO__":"__SAMPLE__",
+"Unity Modules":["UI"],
+"Version":"1.0.0",
+"UnityMinimumVersion":"4.6.3",
+"PlayMakerMinimumVersion":"1.7.8.3",
+"unitypackage":"PlayMaker/Ecosystem/Custom Samples/uGui/uGuiIosViewController.unitypackage",
+"pingAssetPath":"Assets/PlayMaker Custom Samples/uGui/uGuiIosViewController/uGuiIosViewController.unity"
+}
