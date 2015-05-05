@@ -5,7 +5,6 @@ using System.Collections;
 
 using HutongGames.PlayMaker;
 using HutongGames.PlayMaker.Actions;
-using HutongGames.PlayMaker.Ecosystem.Utils;
 
 public class PlayMakerUGuiCanvasRaycastFilterEventsProxy : MonoBehaviour, ICanvasRaycastFilter
 {
