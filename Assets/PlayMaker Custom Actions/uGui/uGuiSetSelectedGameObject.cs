@@ -1,5 +1,5 @@
 // (c) Copyright HutongGames, LLC 2010-2015. All rights reserved.
-// http://hutonggames.com/playmakerforum/index.php?topic=8452.30
+// http://hutonggames.com/playmakerforum/index.php?topic=8452
 //--- __ECO__ __ACTION__ ---//
 using UnityEngine;
 using UnityEngine.EventSystems;
