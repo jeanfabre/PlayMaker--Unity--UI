@@ -23,6 +23,7 @@ namespace HutongGames.PlayMaker.Actions
 		{
 		    DoSetSelectedGameObject();
 			
+			Finish();	
 		}
 		
 		void DoSetSelectedGameObject()
