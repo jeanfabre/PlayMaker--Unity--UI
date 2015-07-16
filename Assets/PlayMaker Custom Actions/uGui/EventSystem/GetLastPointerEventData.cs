@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 
 namespace HutongGames.PlayMaker.Actions
 {
-	[ActionCategory("uGUI")]
+	[ActionCategory("uGui")]
 	[Tooltip("Gets pointer data on the last System event.")]
 	public class GetLastPointerDataInfo : FsmStateAction
 	{
