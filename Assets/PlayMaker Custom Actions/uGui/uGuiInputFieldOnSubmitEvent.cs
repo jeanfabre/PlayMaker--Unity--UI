@@ -6,8 +6,10 @@ using UnityEngine;
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory("uGui")]
-	[Tooltip("Fires an event when editing ended for a UGui InputField component. Event string data will feature the text value")]
-	public class uGuiInputFieldOnEndEditEvent : FsmStateAction
+	[Tooltip("Fires an event when user submits for a UGui InputField component. \n" +
+		"This only fires if the user press Enter, not when field looses focus or user escaped the field.\n" +
+		"Event string data will feature the text value")]
+	public class uGuiInputFieldOnSubmitEvent : FsmStateAction
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(UnityEngine.UI.InputField))]
@@ -17,9 +19,10 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("Send this event when editing ended.")]
 		public FsmEvent sendEvent;
 
-		[Tooltip("The content of the InputField when edited ended")]
+		[Tooltip("The content of the InputField when submitting")]
 		[UIHint(UIHint.Variable)]
 		public FsmString text;
+
 
 		private UnityEngine.UI.InputField _inputField;
 		
@@ -58,9 +61,13 @@ namespace HutongGames.PlayMaker.Actions
 
 		public void DoOnEndEdit(string value)
 		{
-			text.Value = value;
-			Fsm.EventData.StringData = value;
-			Fsm.Event(sendEvent);
+			if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
+			{
+				text.Value = value;
+				Fsm.EventData.StringData = value;
+				Fsm.Event(sendEvent);
+				Finish();
+			}
 		}
 	}
 }
