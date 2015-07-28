@@ -6,7 +6,7 @@ using UnityEngine;
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory("uGui")]
-	[Tooltip("Fires an event when editing ended for a UGui InputField component. Event string data will feature the text value")]
+	[Tooltip("Fires an event when editing ended for a UGui InputField component. Event string data will feature the text value, and the boolean will be true is it was a cancel action")]
 	public class uGuiInputFieldOnEndEditEvent : FsmStateAction
 	{
 		[RequiredField]
@@ -60,6 +60,7 @@ namespace HutongGames.PlayMaker.Actions
 		{
 			text.Value = value;
 			Fsm.EventData.StringData = value;
+			Fsm.EventData.BoolData = _inputField.wasCanceled;
 			Fsm.Event(sendEvent);
 		}
 	}

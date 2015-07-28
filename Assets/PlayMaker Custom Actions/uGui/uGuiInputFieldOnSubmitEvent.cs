@@ -61,7 +61,8 @@ namespace HutongGames.PlayMaker.Actions
 
 		public void DoOnEndEdit(string value)
 		{
-			if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
+
+			if (!_inputField.wasCanceled)
 			{
 				text.Value = value;
 				Fsm.EventData.StringData = value;
