@@ -13,8 +13,7 @@ namespace HutongGames.PlayMaker.Actions
 		[CheckForComponent(typeof(UnityEngine.UI.InputField))]
 		[Tooltip("The GameObject with the InputField ui component.")]
 		public FsmOwnerDefault gameObject;
-		
-		[RequiredField]
+
 		[UIHint(UIHint.Variable)]
 		[Tooltip("The hide Mobile flag value of the UGui InputField component.")]
 		public FsmBool hideMobileInput;
