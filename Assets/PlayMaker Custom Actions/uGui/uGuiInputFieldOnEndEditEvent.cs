@@ -21,6 +21,10 @@ namespace HutongGames.PlayMaker.Actions
 		[UIHint(UIHint.Variable)]
 		public FsmString text;
 
+		[Tooltip("The canceled state of the InputField when edited ended")]
+		[UIHint(UIHint.Variable)]
+		public FsmBool wasCanceled;
+
 		private UnityEngine.UI.InputField _inputField;
 		
 		public override void Reset()
@@ -28,6 +32,7 @@ namespace HutongGames.PlayMaker.Actions
 			gameObject = null;
 			sendEvent = null;
 			text = null;
+			wasCanceled = null;
 		}
 		
 		public override void OnEnter()
@@ -59,6 +64,7 @@ namespace HutongGames.PlayMaker.Actions
 		public void DoOnEndEdit(string value)
 		{
 			text.Value = value;
+			wasCanceled.Value = _inputField.wasCanceled;
 			Fsm.EventData.StringData = value;
 			Fsm.EventData.BoolData = _inputField.wasCanceled;
 			Fsm.Event(sendEvent);

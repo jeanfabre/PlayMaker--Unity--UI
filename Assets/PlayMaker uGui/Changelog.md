@@ -1,5 +1,17 @@
 #PlayMaker uGui Change log
 
+###1.1.2
+**New**  
+- new action `uGuiInputFieldOnSubmitEvent` 
+- new action `uGuiInputFieldGetWasCanceled`
+- new action `uGuiInputFieldGetIsFocused`
+- improved `uGuiInputFieldOnEndEditEvent` with text access and wasCanceled property access
+- improved `PlayMakerUGuiComponentProxy` for InputField EndEdit Event to pass wasCanceled in the EventData.
+ 
+**Fix**  
+- removed unecessary RequiredField attribute in action `uGuiInputFieldGetIsFocused` and `uGuiInputFieldGetHideMobileInput`  
+
+ 
 ###1.1.1
 **New**  
 - new get/set local position and rotation for RectTransform  
