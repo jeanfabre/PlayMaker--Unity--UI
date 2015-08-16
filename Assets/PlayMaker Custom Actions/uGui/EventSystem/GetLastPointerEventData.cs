@@ -218,13 +218,14 @@ namespace HutongGames.PlayMaker.Actions
 
 			if (!worldNormal.IsNone)
 			{
-				worldNormal.Value =  lastPointeEventData.worldNormal;
+				worldNormal.Value =  lastPointeEventData.pointerCurrentRaycast.worldNormal;
 			}
 
 			if (!worldPosition.IsNone)
 			{
-				worldPosition.Value =  lastPointeEventData.worldPosition;
+				worldPosition.Value =  lastPointeEventData.pointerCurrentRaycast.worldPosition;
 			}
+
 
 			Finish();
 		}
