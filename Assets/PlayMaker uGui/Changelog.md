@@ -1,5 +1,11 @@
 #PlayMaker uGui Change log
 
+###1.1.3
+- new action `RectTransformContainsScreenPoint` 
+- new action `RectTransformScreenPointToWorldPointInRectangle`
+- new action `RectTransformScreenPointToLocalPointInRectangle`
+- Fixed obsolete properties in `GetLastPointerEventData` action
+
 ###1.1.2
 **New**  
 - new action `uGuiInputFieldOnSubmitEvent` 
@@ -20,7 +26,7 @@
 
 
 **Fix**  
-- Fixed IsPointerOverUiObject action
+- Fixed `IsPointerOverUiObject` action
 - Fixed Ecosystem drag example to use the new actions
 
 **Improvement**  
