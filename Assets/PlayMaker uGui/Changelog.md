@@ -1,6 +1,13 @@
 #PlayMaker uGui Change log
 
+###1.1.4
+**new**
+- Fixed `uGuiToggleSetIsOn` bad class name  
+- Fixed api upgrades on 5.X on RectTransform custom actions
+
+
 ###1.1.3
+**new**
 - new action `RectTransformContainsScreenPoint` 
 - new action `RectTransformScreenPointToWorldPointInRectangle`
 - new action `RectTransformScreenPointToLocalPointInRectangle`

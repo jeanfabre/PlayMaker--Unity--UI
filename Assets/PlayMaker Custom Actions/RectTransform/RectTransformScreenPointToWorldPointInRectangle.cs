@@ -76,9 +76,9 @@ namespace HutongGames.PlayMaker.Actions
 
 			if (! camera.IsNone)
 			{
-				_camera = camera.Value.camera;
+				_camera = camera.Value.GetComponent<Camera>();
 			}else{
-				_camera = EventSystem.current.camera;
+				_camera = EventSystem.current.GetComponent<Camera>();
 			}
 
 			DoCheck();

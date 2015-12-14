@@ -14,7 +14,6 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("The GameObject with the InputField ui component.")]
 		public FsmOwnerDefault gameObject;
 
-		[RequiredField]
 		[UIHint(UIHint.TextArea)]
 		[Tooltip("The text of the UGui InputField component.")]
 		public FsmString text;
