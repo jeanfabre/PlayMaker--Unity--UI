@@ -1,5 +1,5 @@
 // (c) Copyright HutongGames, LLC 2010-2015. All rights reserved.
-// Combined Action by djaydino
+// Combined Action for easier use by djaydino
 /*--- __ECO__ __ACTION__
 EcoMetaStart
 {
