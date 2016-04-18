@@ -1,5 +1,8 @@
 #PlayMaker uGui Change log
 
+###1.1.7
+**Fix** Fixed `uGuiIamgeGetSprite`
+
 ###1.1.6
 **Fix** Fixed `uGuiToggleGetIsOn`
 
