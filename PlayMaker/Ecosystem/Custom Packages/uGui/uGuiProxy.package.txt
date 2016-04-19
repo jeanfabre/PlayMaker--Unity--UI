@@ -2,7 +2,7 @@
 "__ECO__":"__PACKAGE__",
 "Type":"Unity Module",
 "UnityModules":["UI"],
-"Version”:”1.1.7”,
+"Version":"1.1.7",
 "UnityMinimumVersion":"4.6.7",
 "PlayMakerMinimumVersion":"1.7.8.3",
 "unitypackage":"PlayMaker/Ecosystem/Custom Packages/uGui/uGuiProxy.unitypackage",
