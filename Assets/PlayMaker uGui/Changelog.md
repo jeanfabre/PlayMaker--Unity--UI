@@ -1,7 +1,10 @@
 #PlayMaker uGui Change log
 
+###1.1.8
+**Fix** fixed obsolete action `uGuiInputFieldScreenToLocal` for Unity 5.3+
+
 ###1.1.7
-**Fix** Fixed `uGuiIamgeGetSprite`
+**Fix** Fixed `uGuiImageGetSprite`
 
 ###1.1.6
 **Fix** Fixed `uGuiToggleGetIsOn`
