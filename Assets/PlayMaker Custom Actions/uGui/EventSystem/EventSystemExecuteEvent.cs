@@ -80,82 +80,82 @@ namespace HutongGames.PlayMaker.Actions
 
 			if (_handlerType == EventHandlers.Submit)
 			{
-				if (ExecuteEvents.CanHandleEvent<ISubmitHandler>(go)) return false;
+				if (!ExecuteEvents.CanHandleEvent<ISubmitHandler>(go)) return false;
 	
-				ExecuteEvents.Execute(go, new BaseEventData(EventSystem.current), ExecuteEvents.beginDragHandler);
+				ExecuteEvents.Execute(go, new BaseEventData(EventSystem.current), ExecuteEvents.submitHandler);
 				
 			}else if (_handlerType == EventHandlers.beginDrag)
 			{
-				if (ExecuteEvents.CanHandleEvent<IBeginDragHandler>(go)) return false;
+				if (!ExecuteEvents.CanHandleEvent<IBeginDragHandler>(go)) return false;
 
 				ExecuteEvents.Execute(go, new BaseEventData(EventSystem.current), ExecuteEvents.beginDragHandler);
 
 			}else if (_handlerType == EventHandlers.cancel)
 			{
-				if (ExecuteEvents.CanHandleEvent<ICancelHandler>(go)) return false;
+				if (!ExecuteEvents.CanHandleEvent<ICancelHandler>(go)) return false;
 
 				ExecuteEvents.Execute(go, new BaseEventData(EventSystem.current), ExecuteEvents.cancelHandler);
 			}else if (_handlerType == EventHandlers.deselectHandler)
 			{
-				if (ExecuteEvents.CanHandleEvent<IDeselectHandler>(go)) return false;
+				if (!ExecuteEvents.CanHandleEvent<IDeselectHandler>(go)) return false;
 
 				ExecuteEvents.Execute(go, new BaseEventData(EventSystem.current), ExecuteEvents.deselectHandler);
 			}
 			if (_handlerType == EventHandlers.dragHandler)
 			{
-				if (ExecuteEvents.CanHandleEvent<IDragHandler>(go)) return false;
+				if (!ExecuteEvents.CanHandleEvent<IDragHandler>(go)) return false;
 
 				ExecuteEvents.Execute(go, new BaseEventData(EventSystem.current), ExecuteEvents.dragHandler);
 			}
 			if (_handlerType == EventHandlers.dropHandler)
 			{
-				if (ExecuteEvents.CanHandleEvent<IDropHandler>(go)) return false;
+				if (!ExecuteEvents.CanHandleEvent<IDropHandler>(go)) return false;
 
 				ExecuteEvents.Execute(go, new BaseEventData(EventSystem.current), ExecuteEvents.dropHandler);
 			}if (_handlerType == EventHandlers.endDragHandler)
 			{
-				if (ExecuteEvents.CanHandleEvent<IEndDragHandler>(go)) return false;
+				if (!ExecuteEvents.CanHandleEvent<IEndDragHandler>(go)) return false;
 
 				ExecuteEvents.Execute(go, new BaseEventData(EventSystem.current), ExecuteEvents.endDragHandler);
 			}if (_handlerType == EventHandlers.initializePotentialDrag)
 			{
-				if (ExecuteEvents.CanHandleEvent<IInitializePotentialDragHandler>(go)) return false;
+				if (!ExecuteEvents.CanHandleEvent<IInitializePotentialDragHandler>(go)) return false;
 
 				ExecuteEvents.Execute(go, new BaseEventData(EventSystem.current), ExecuteEvents.initializePotentialDrag);
 			}if (_handlerType == EventHandlers.pointerClickHandler)
 			{
-				if (ExecuteEvents.CanHandleEvent<IPointerClickHandler>(go)) return false;
+				if (!ExecuteEvents.CanHandleEvent<IPointerClickHandler>(go)) return false;
 
 				ExecuteEvents.Execute(go, new BaseEventData(EventSystem.current), ExecuteEvents.pointerClickHandler);
 			}if (_handlerType == EventHandlers.pointerDownHandler)
 			{
-				if (ExecuteEvents.CanHandleEvent<IPointerDownHandler>(go)) return false;
+				if (!ExecuteEvents.CanHandleEvent<IPointerDownHandler>(go)) return false;
 
 				ExecuteEvents.Execute(go, new BaseEventData(EventSystem.current), ExecuteEvents.pointerDownHandler);
 			}if (_handlerType == EventHandlers.pointerUpHandler)
 			{
-				if (ExecuteEvents.CanHandleEvent<IPointerUpHandler>(go)) return false;
+				if (!ExecuteEvents.CanHandleEvent<IPointerUpHandler>(go)) return false;
 
 				ExecuteEvents.Execute(go, new BaseEventData(EventSystem.current), ExecuteEvents.pointerUpHandler);
 			}if (_handlerType == EventHandlers.pointerEnterHandler)
 			{
-				if (ExecuteEvents.CanHandleEvent<IPointerEnterHandler>(go)) return false;
+				if (!ExecuteEvents.CanHandleEvent<IPointerEnterHandler>(go)) return false;
 
 				ExecuteEvents.Execute(go, new BaseEventData(EventSystem.current), ExecuteEvents.pointerEnterHandler);
 			}if (_handlerType == EventHandlers.pointerExitHandler)
 			{
-				if (ExecuteEvents.CanHandleEvent<IPointerExitHandler>(go)) return false;
+				if (!ExecuteEvents.CanHandleEvent<IPointerExitHandler>(go)) return false;
 
 				ExecuteEvents.Execute(go, new BaseEventData(EventSystem.current), ExecuteEvents.pointerExitHandler);
 			}
 			if (_handlerType == EventHandlers.scrollHandler)
 			{
-				if (ExecuteEvents.CanHandleEvent<IScrollHandler>(go)) return false;
+				if (!ExecuteEvents.CanHandleEvent<IScrollHandler>(go)) return false;
 
 				ExecuteEvents.Execute(go, new BaseEventData(EventSystem.current), ExecuteEvents.scrollHandler);
 			}if (_handlerType == EventHandlers.updateSelectedHandler)
 			{
-				if (ExecuteEvents.CanHandleEvent<IUpdateSelectedHandler>(go)) return false;
+				if (!ExecuteEvents.CanHandleEvent<IUpdateSelectedHandler>(go)) return false;
 
 				ExecuteEvents.Execute(go, new BaseEventData(EventSystem.current), ExecuteEvents.updateSelectedHandler);
 			}
