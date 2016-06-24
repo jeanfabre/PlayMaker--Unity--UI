@@ -2,9 +2,9 @@
 "__ECO__":"__PACKAGE__",
 "Type":"Unity Module",
 "UnityModules":["UI"],
-"Version":"1.1.8",
+"Version":"1.1.9",
 "UnityMinimumVersion":"4.6.7",
-"PlayMakerMinimumVersion":"1.7.8.3",
+"PlayMakerMinimumVersion":"1.8.1",
 "unitypackage":"PlayMaker/Ecosystem/Custom Packages/uGui/uGuiProxy.unitypackage",
 "pingAssetPath":"Assets/PlayMaker uGui/PlayMakerUGuiComponentProxy.cs",
 "YoutubeVideos":["http://www.youtube.com/watch?v=KZCtGySZ4AI&index=1&list=PLFXYYxmSM-Ge4Qxx80EnT6xiLHQXKGHW3"]

@@ -1,5 +1,15 @@
 #PlayMaker uGui Change log
 
+###1.1.9
+**new** 
+- new action `EventSystemExecuteEvent` 
+- new action `EventSystemCurrentRayCastAll` 
+- new sample `uGuiVrGazeButton`
+
+**udpate**
+- PlayMakerUtils  
+
+
 ###1.1.8
 **Fix** fixed obsolete action `uGuiInputFieldScreenToLocal` for Unity 5.3+
 
@@ -16,7 +26,7 @@
 
 
 ###1.1.4
-**new**
+**fix**
 - Fixed `uGuiToggleSetIsOn` bad class name  
 - Fixed api upgrades on 5.X on RectTransform custom actions
 
