@@ -1,4 +1,11 @@
-﻿using UnityEngine;
+﻿// (c) Copyright HutongGames, LLC 2010-2016. All rights reserved.
+
+#if (UNITY_4_3 || UNITY_4_5 || UNITY_4_6 || UNITY_4_7 || UNITY_5_0 || UNITY_5_1)
+#else
+#define UNITY_5_2_OR_NEWER
+#endif
+
+using UnityEngine;
 using uUI = UnityEngine.UI;
 using UnityEngine.Events;
 
@@ -55,6 +62,7 @@ public class PlayMakerUGuiComponentProxy : MonoBehaviour {
 	FsmBool fsmBoolTarget;
 	FsmVector2 fsmVector2Target;
 	FsmString fsmStringTarget;
+	FsmInt fsmIntTarget;
 
 	// event target
 	public FsmEventSetup fsmEventSetup;
@@ -304,6 +312,19 @@ public class PlayMakerUGuiComponentProxy : MonoBehaviour {
 				lastInputFieldValue = "";
 			}
 		}
+
+		#if UNITY_5_2_OR_NEWER
+		
+			if (UiTarget.GetComponent<uUI.Dropdown>()!=null)
+			{
+				UiTarget.GetComponent<uUI.Dropdown>().onValueChanged.AddListener(OnValueChanged);
+				// force the value because it's not fired when starting ( Unity said they may implement it)
+				if (action== ActionType.SetFsmVariable)
+				{
+					SetFsmVariable(UiTarget.GetComponent<uUI.Dropdown>().value);
+				}
+			}
+		#endif
 		
 
 	}
@@ -328,6 +349,21 @@ public class PlayMakerUGuiComponentProxy : MonoBehaviour {
 		{
 			FsmEventData _eventData = new FsmEventData();
 			_eventData.BoolData = value;
+			FirePlayMakerEvent(_eventData);
+		}else
+		{
+			SetFsmVariable(value);
+		}
+	}
+
+	protected void OnValueChanged(int value)
+	{
+		if (debug) Debug.Log("OnValueChanged(int): "+value);
+		
+		if (action== ActionType.SendFsmEvent)
+		{
+			FsmEventData _eventData = new FsmEventData();
+			_eventData.IntData = value;
 			FirePlayMakerEvent(_eventData);
 		}else
 		{

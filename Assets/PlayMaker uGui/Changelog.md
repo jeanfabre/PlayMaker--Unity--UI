@@ -1,5 +1,12 @@
 #PlayMaker uGui Change log
 
+###1.2.0
+**Release** 27/06/2016  
+
+**new**
+- Dropdown support on 5.2+  
+
+
 ###1.1.9
 **new** 
 - new action `EventSystemExecuteEvent` 
