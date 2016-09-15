@@ -1,5 +1,12 @@
 #PlayMaker uGui Change log
 
+###1.2.1
+**Release** 15/09/2016  
+
+**new**  
+- new action `uGuiInputFieldGetTextAsFloat`  
+- new action `uGuiInputFieldGetTextAsInt`  
+
 ###1.2.0
 **Release** 27/06/2016  
 
