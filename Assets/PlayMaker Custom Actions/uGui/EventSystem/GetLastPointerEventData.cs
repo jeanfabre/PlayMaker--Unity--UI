@@ -27,6 +27,10 @@ namespace HutongGames.PlayMaker.Actions
 		public FsmBool dragging;
 
 		[UIHint(UIHint.Variable)]
+		[ObjectType(typeof(PointerEventData.InputButton))]
+		public FsmEnum inputButton;
+
+		[UIHint(UIHint.Variable)]
 		public FsmBool eligibleForClick;
 
 		[UIHint(UIHint.Variable)]
@@ -87,6 +91,8 @@ namespace HutongGames.PlayMaker.Actions
 			clickTime = null;
 			delta = null;
 			dragging = null;
+			inputButton = PointerEventData.InputButton.Left;
+
 			eligibleForClick = null;
 			enterEventCamera = null;
 			pressEventCamera = null;
@@ -116,6 +122,7 @@ namespace HutongGames.PlayMaker.Actions
 				return;
 			}
 
+
 			if (!clickCount.IsNone)
 			{
 				clickCount.Value =  lastPointeEventData.clickCount;
@@ -134,6 +141,11 @@ namespace HutongGames.PlayMaker.Actions
 			if (!dragging.IsNone)
 			{
 				dragging.Value =  lastPointeEventData.dragging;
+			}
+
+			if (!inputButton.IsNone)
+			{
+				inputButton.Value = (PointerEventData.InputButton)lastPointeEventData.button;
 			}
 
 			if (!eligibleForClick.IsNone)

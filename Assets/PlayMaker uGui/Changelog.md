@@ -1,5 +1,11 @@
 #PlayMaker uGui Change log
 
+###1.3
+**Release** 25/10/2016  
+
+**udpate**  
+- updated GetLastPointerData to inform about Inputbutton  
+
 ###1.2.1
 **Release** 15/09/2016  
 
