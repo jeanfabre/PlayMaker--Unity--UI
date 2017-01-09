@@ -1,5 +1,12 @@
 #PlayMaker uGui Change log
 
+###1.3.1
+**Release** 09/01/2017  
+
+**new**  
+- new action `uGuiGraphicCrossFadeColor`  
+- new action `uGuiGraphicCrossFadeAlpha`  
+
 ###1.3
 **Release** 25/10/2016  
 
