@@ -1,5 +1,11 @@
 #PlayMaker uGui Change log
 
+###1.3.2
+**Release** 09/01/2017  
+
+**fix** 
+- Reuse EventData Static, instead of creating new to avoid loosing data during actions stack processing
+
 ###1.3.1
 **Release** 09/01/2017  
 

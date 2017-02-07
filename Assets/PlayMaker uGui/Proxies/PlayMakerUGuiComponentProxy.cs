@@ -337,7 +337,7 @@ public class PlayMakerUGuiComponentProxy : MonoBehaviour {
 	{
 		if (debug) Debug.Log("OnClick");
 
-		FsmEventData _eventData = new FsmEventData();
+		FsmEventData _eventData = HutongGames.PlayMaker.Fsm.EventData;
 		this.FirePlayMakerEvent(_eventData);
 	}
 
@@ -347,7 +347,7 @@ public class PlayMakerUGuiComponentProxy : MonoBehaviour {
 
 		if (action== ActionType.SendFsmEvent)
 		{
-			FsmEventData _eventData = new FsmEventData();
+			FsmEventData _eventData = HutongGames.PlayMaker.Fsm.EventData;
 			_eventData.BoolData = value;
 			FirePlayMakerEvent(_eventData);
 		}else
@@ -362,7 +362,7 @@ public class PlayMakerUGuiComponentProxy : MonoBehaviour {
 		
 		if (action== ActionType.SendFsmEvent)
 		{
-			FsmEventData _eventData = new FsmEventData();
+			FsmEventData _eventData = HutongGames.PlayMaker.Fsm.EventData;
 			_eventData.IntData = value;
 			FirePlayMakerEvent(_eventData);
 		}else
@@ -377,7 +377,7 @@ public class PlayMakerUGuiComponentProxy : MonoBehaviour {
 
 		if (action== ActionType.SendFsmEvent)
 		{
-			FsmEventData _eventData = new FsmEventData();
+			FsmEventData _eventData = HutongGames.PlayMaker.Fsm.EventData;
 			_eventData.FloatData = value;
 			FirePlayMakerEvent(_eventData);
 		}else
@@ -392,7 +392,7 @@ public class PlayMakerUGuiComponentProxy : MonoBehaviour {
 		
 		if (action== ActionType.SendFsmEvent)
 		{
-			FsmEventData _eventData = new FsmEventData();
+			FsmEventData _eventData = HutongGames.PlayMaker.Fsm.EventData;
 			_eventData.Vector2Data = value;
 			FirePlayMakerEvent(_eventData);
 		}else
@@ -407,7 +407,7 @@ public class PlayMakerUGuiComponentProxy : MonoBehaviour {
 
 		if (action== ActionType.SendFsmEvent)
 		{
-			FsmEventData _eventData = new FsmEventData();
+			FsmEventData _eventData = HutongGames.PlayMaker.Fsm.EventData;
 			_eventData.StringData = value;
 			_eventData.BoolData = inputField.wasCanceled;
 			FirePlayMakerEvent(_eventData);
