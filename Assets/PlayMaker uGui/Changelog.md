@@ -1,5 +1,13 @@
 #PlayMaker uGui Change log
 
+###1.3.3
+**Release** 13/02/2017  
+
+**new** 
+- new action `uGuiDropDownClearOptions`  
+- new action `uGuiDropDownAddOptions`
+
+
 ###1.3.2
 **Release** 09/01/2017  
 
