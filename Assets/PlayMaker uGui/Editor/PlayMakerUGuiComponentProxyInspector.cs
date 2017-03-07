@@ -191,7 +191,16 @@ public class PlayMakerUGuiComponentProxyInspector : Editor {
 					_target.fsmEventSetup.customEventName = "";
 				}
 			}
-			GUILayout.EndHorizontal();
+		GUILayout.EndHorizontal();
+
+		bool _showSendToChildren = _target.fsmEventSetup.target == PlayMakerUGuiComponentProxy.PlayMakerProxyEventTarget.GameObject ||
+			_target.fsmEventSetup.target == PlayMakerUGuiComponentProxy.PlayMakerProxyEventTarget.Owner
+			;
+
+		if (_showSendToChildren)
+		{
+			_target.fsmEventSetup.sendtoChildren = EditorGUILayout.Toggle("Send to Children",_target.fsmEventSetup.sendtoChildren);
+		}
 
 		if (!isimplemented)
 		{

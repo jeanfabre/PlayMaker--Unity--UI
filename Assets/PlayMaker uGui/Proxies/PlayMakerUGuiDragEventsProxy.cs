@@ -25,7 +25,9 @@ public class PlayMakerUGuiDragEventsProxy : MonoBehaviour, IDragHandler, IBeginD
 	[ShowOptions]
 	public PlayMakerEvent onEndDragEvent= new PlayMakerEvent("UGUI / ON END DRAG");
 	
+
 	public void OnBeginDrag (PointerEventData data) {
+
 		if (debug)
 		{
 			UnityEngine.Debug.Log("OnBeginDrag "+data.pointerId+" on "+this.gameObject.name);
@@ -36,6 +38,7 @@ public class PlayMakerUGuiDragEventsProxy : MonoBehaviour, IDragHandler, IBeginD
 	}
 
 	public void OnDrag (PointerEventData data) {
+
 		if (debug)
 		{
 			UnityEngine.Debug.Log("OnDrag "+data.pointerId+" on "+this.gameObject.name);
@@ -46,6 +49,7 @@ public class PlayMakerUGuiDragEventsProxy : MonoBehaviour, IDragHandler, IBeginD
 	}
 	
 	public void OnEndDrag (PointerEventData data) {
+
 		if (debug)
 		{
 			UnityEngine.Debug.Log("OnEndDrag "+data.pointerId+" on "+this.gameObject.name);

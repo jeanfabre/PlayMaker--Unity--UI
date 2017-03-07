@@ -1,11 +1,23 @@
 #PlayMaker uGui Change log
 
+
+###1.3.4
+**Release** 07/03/2017
+
+**new** 
+- SendToChildren option expose inside PlayMakerUGuiComponentProxy for event Target  
+- new action `uGuiScrollRectSetVertical`  
+- new action `uGuiScrollRectSetHorizontal`  
+- new action `uGuiCanvasScalerGetScaleFactor`
+- new action `uGuiCanvasScalerSetScaleFactor`
+
+
 ###1.3.3
 **Release** 13/02/2017  
 
 **new** 
 - new action `uGuiDropDownClearOptions`  
-- new action `uGuiDropDownAddOptions`
+- new action `uGuiDropDownAddOptions`  
 
 
 ###1.3.2

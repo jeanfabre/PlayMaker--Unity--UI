@@ -43,6 +43,7 @@ public class PlayMakerUGuiComponentProxy : MonoBehaviour {
 		public PlayMakerFSM fsmComponent;
 		public string customEventName;
 		public string builtInEventName;
+		public bool sendtoChildren;
 	}
 
 	string error;
@@ -488,9 +489,9 @@ public class PlayMakerUGuiComponentProxy : MonoBehaviour {
 			HutongGames.PlayMaker.Fsm.EventData = eventData;
 		}
 
-		fsmEventTarget.excludeSelf = false;
+		fsmEventTarget.excludeSelf = false; // not available in this context, only when even ti sfired from an Fsm.
 
-	//	_eventTarget.sendToChildren = false;
+		fsmEventTarget.sendToChildren = fsmEventSetup.sendtoChildren;
 
 		if (PlayMakerUGuiSceneProxy.fsm == null)
 		{
@@ -522,12 +523,12 @@ public class PlayMakerUGuiComponentProxy : MonoBehaviour {
 
 		if (fsmEventSetup.target == PlayMakerProxyEventTarget.GameObject)
 		{
-			return PlayMakerUtils.DoesGameObjectImplementsEvent(fsmEventSetup.gameObject,eventName);
+			return PlayMakerUtils.DoesGameObjectImplementsEvent(fsmEventSetup.gameObject,eventName,fsmEventSetup.sendtoChildren);
 		}
 		
 		if (fsmEventSetup.target == PlayMakerProxyEventTarget.Owner)
 		{
-			return PlayMakerUtils.DoesGameObjectImplementsEvent(this.gameObject,eventName);
+			return PlayMakerUtils.DoesGameObjectImplementsEvent(this.gameObject,eventName,fsmEventSetup.sendtoChildren);
 		}
 
 		return false;
