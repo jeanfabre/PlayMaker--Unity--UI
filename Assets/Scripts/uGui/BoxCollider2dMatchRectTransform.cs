@@ -73,6 +73,18 @@ public class BoxCollider2dMatchRectTransform : MonoBehaviour {
 		MatchSize();
 	}
 
+	void Update()
+	{
+		if (IncludeChildren)
+		{
+
+			MatchSize();
+
+		}
+
+	}
+
+
 
 	public void MatchSize()
 	{
@@ -159,6 +171,10 @@ public class BoxCollider2dMatchRectTransformInspector : Editor
 		myTarget = (BoxCollider2dMatchRectTransform)target;
 		
 		myTarget.IncludeChildren = EditorGUILayout.Toggle("Include Children",myTarget.IncludeChildren);
+		if (myTarget.IncludeChildren )
+		{
+			EditorGUILayout.LabelField("Warning","Affects performances"); 
+		}
 		myTarget.Margin = EditorGUILayout.Vector2Field("Margin",myTarget.Margin);
 	}
 }
