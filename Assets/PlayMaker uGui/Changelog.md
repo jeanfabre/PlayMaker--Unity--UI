@@ -2,6 +2,13 @@
 
 
 ###1.3.4
+**Release** 16/03/2017
+
+**new** 
+- new component `BoxCollider2dMatchRectTransform`  
+
+
+###1.3.4
 **Release** 07/03/2017
 
 **new** 
