@@ -4,7 +4,11 @@
 **Release** 12/05/2017
 
 **update** 
-- fixed obsolete api for Unity 5.6 or newer 
+- fixed obsolete api for Unity 5.6 or newer  
+- updated Ecosystem future compatibility  
+- added some missing tooltips here and there  
+- moved action `uGuiSetSelectedGameObject` in EventSystem folder  
+
 
 ###1.3.5
 **Release** 16/03/2017
