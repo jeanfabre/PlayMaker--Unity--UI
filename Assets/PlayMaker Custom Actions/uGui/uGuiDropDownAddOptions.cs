@@ -1,5 +1,5 @@
 ﻿// (c) Copyright HutongGames, LLC 2010-2017. All rights reserved.
-//--- __ECO__ __ACTION__ ---//
+//--- __ECO__ __PLAYMAKER__ __ACTION__ ---//
 
 #if UNITY_5_3_OR_NEWER
 using UnityEngine;

@@ -1,7 +1,9 @@
 ﻿// (c) Copyright HutongGames, LLC 2010-2017. All rights reserved.
-//--- __ECO__ __ACTION__ ---//
+//--- __ECO__ __PLAYMAKER__ __ACTION__ ---//
 // Made By : DjayDino
+
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace HutongGames.PlayMaker.Actions
 {
@@ -14,12 +16,15 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("The GameObject with the Image ui component.")]
 		public FsmOwnerDefault gameObject;
 
+		[RequiredField]
 		[HasFloatSlider(0,1)]
+		[Tooltip("The fill amount.")]
 		public FsmFloat ImageFillAmount;
-		
+
+		[Tooltip("Repeats every frame")]
 		public bool everyFrame;
 
-		UnityEngine.UI.Image _image;
+		Image _image;
 
 		public override void Reset()
 		{
@@ -51,7 +56,10 @@ namespace HutongGames.PlayMaker.Actions
 		
 		void DoSetFillAmount()
 		{
-			_image.fillAmount = ImageFillAmount.Value;
+			if (_image!=null)
+			{
+				_image.fillAmount = ImageFillAmount.Value;
+			}
 		}
 
 		

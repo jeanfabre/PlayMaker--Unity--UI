@@ -1,7 +1,12 @@
 #PlayMaker uGui Change log
 
+###1.3.6
+**Release** 12/05/2017
 
-###1.3.4
+**update** 
+- fixed obsolete api for Unity 5.6 or newer 
+
+###1.3.5
 **Release** 16/03/2017
 
 **new** 
