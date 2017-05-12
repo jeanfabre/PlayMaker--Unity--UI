@@ -9,6 +9,9 @@
 - added some missing tooltips here and there  
 - moved action `uGuiSetSelectedGameObject` in EventSystem folder  
 
+**new**
+- new action `uGuiScrollbarSetDirection` `uGuiScrollbarGetDirection` `uGuiSliderSetDirection` `uGuiSliderGetDirection`
+
 
 ###1.3.5
 **Release** 16/03/2017
