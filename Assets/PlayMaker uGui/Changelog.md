@@ -1,5 +1,13 @@
 #PlayMaker uGui Change log
 
+###1.3.7
+**Release** 05/06/2017  
+
+**fix**
+- `PlayMaker uGui` Prefab fixed when scenes are loaded additively  
+
+**update** 
+- `PlayMaker utils` update
 ###1.3.6
 **Release** 12/05/2017
 

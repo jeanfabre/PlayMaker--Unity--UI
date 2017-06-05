@@ -10,11 +10,14 @@ public class PlayMakerUGuiSceneProxy : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
+		if (fsm != null)
+		{
+			Destroy (this.gameObject);
+			return;
+		}
+
 		PlayMakerUGuiSceneProxy.fsm = GetComponent<PlayMakerFSM>();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
 }
