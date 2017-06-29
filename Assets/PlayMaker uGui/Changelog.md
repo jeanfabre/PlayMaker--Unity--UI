@@ -1,5 +1,14 @@
 #PlayMaker uGui Change log
 
+###1.3.8
+**Release** 29/06/2017  
+
+**fix**
+- renamed action `GetLastPointerDataInfo` for consistency
+
+**new**
+- new actions for all system Events `uGuiOnXXXEvent`
+
 ###1.3.7
 **Release** 05/06/2017  
 

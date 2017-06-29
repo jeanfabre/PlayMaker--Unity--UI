@@ -12,23 +12,23 @@ EcoMetaEnd
 
 using UnityEngine;
 using UnityEngine.EventSystems;
-
+using UnityEngine.Events;
 
 #if UNITY_5_6_OR_NEWER   
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory("uGui")]
-	[Tooltip("Sends event when OnDrag is called on the GameObject. Warning this event is sent everyframe while dragging." +
-		"\n Use GetLastPointerDataInfo action to get info from the event.")]
-	public class uGuiOnDragEvent : FsmStateAction
+	[Tooltip("Sends event when OnPointerUp is called on the GameObject." +
+		"\n Use GetLastPointerDataInfo action to get info from the event")]
+	public class uGuiOnPointerUpEvent : FsmStateAction
 	{
 		[RequiredField]
 		[Tooltip("The GameObject with the UGui button component.")]
 		public FsmOwnerDefault gameObject;
 
 		[UIHint(UIHint.Variable)]
-		[Tooltip("Event sent when OnDrag is called")]
-		public FsmEvent onDragEvent;
+		[Tooltip("Event sent when PointerUp is called")]
+		public FsmEvent onPointerUpEvent;
 
 
 		GameObject _go;
@@ -38,7 +38,7 @@ namespace HutongGames.PlayMaker.Actions
 		public override void Reset()
 		{
 			gameObject = null;
-			onDragEvent = null;
+			onPointerUpEvent = null;
 		}
 		
 		public override void OnEnter()
@@ -55,14 +55,14 @@ namespace HutongGames.PlayMaker.Actions
 			{
 				_trigger = _go.AddComponent<EventTrigger>();
 			}
-
+				
 			if (entry == null)
 			{
 				entry = new EventTrigger.Entry ();
 			}
 
-			entry.eventID = EventTriggerType.Drag;
-			entry.callback.AddListener((data) => { OnDragDelegate((PointerEventData)data); });
+			entry.eventID = EventTriggerType.PointerUp;
+			entry.callback.AddListener((data) => { OnPointerUpDelegate((PointerEventData)data); });
 
 			_trigger.triggers.Add(entry);
 		}
@@ -73,10 +73,11 @@ namespace HutongGames.PlayMaker.Actions
 			_trigger.triggers.Remove (entry);
 		}
 
-		void OnDragDelegate( PointerEventData data)
+
+		void OnPointerUpDelegate( PointerEventData data)
 		{
 			GetLastPointerDataInfo.lastPointeEventData = data;
-			Fsm.Event(onDragEvent);
+			Fsm.Event(onPointerUpEvent);
 		}
 	}
 }
