@@ -10,20 +10,29 @@ using System.Collections.Generic;
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory("uGui")]
-	[Tooltip("Clear options to the options of the Dropdown uGui Component")]
-	public class uGuiDropDownClearOptions : FsmStateAction
+	[Tooltip("set the value (zero based index) of the Dropdown uGui Component")]
+	public class uGuiDropDownSetValue : FsmStateAction
 	{
 		[RequiredField]
 		[CheckForComponent(typeof(UnityEngine.UI.Dropdown))]
 		[Tooltip("The GameObject with the DropDown ui component.")]
 		public FsmOwnerDefault gameObject;
 
+		[RequiredField]
+		[Tooltip("The selected index of the dropdown (zero based index).")]
+		public FsmInt value;
+
+
+		[Tooltip("Repeats every frame")]
+		public bool everyFrame;
 
 		UnityEngine.UI.Dropdown _dropDown;
 
 		public override void Reset()
 		{
 			gameObject = null;
+			value = null;
+			everyFrame = false;
 		}
 		
 		public override void OnEnter()
@@ -36,15 +45,32 @@ namespace HutongGames.PlayMaker.Actions
 			}
 
 
-			if (_dropDown!=null)
+			SetValue ();
+
+			if (!everyFrame)
 			{
-				_dropDown.ClearOptions ();
+				Finish ();
 			}
-			
-			Finish();
 			
 		}
 
+		public override void OnUpdate()
+		{
+			SetValue ();
+		}
+
+		void SetValue()
+		{
+			if (_dropDown==null)
+			{
+				return;
+			}
+
+			if (_dropDown.value != value.Value)
+			{
+				_dropDown.value = value.Value;
+			}
+		}
 	}
 }
 #endif
