@@ -34,7 +34,7 @@ public class PlayMakerUGuiDragEventsProxy : MonoBehaviour, IDragHandler, IBeginD
 		}
 
 		GetLastPointerDataInfo.lastPointeEventData = data;
-		onBeginDragEvent.SendEvent(PlayMakerUGuiSceneProxy.fsm,eventTarget);
+		onBeginDragEvent.SendEvent(null,eventTarget);
 	}
 
 	public void OnDrag (PointerEventData data) {
@@ -45,7 +45,7 @@ public class PlayMakerUGuiDragEventsProxy : MonoBehaviour, IDragHandler, IBeginD
 		}
 
 		GetLastPointerDataInfo.lastPointeEventData = data;
-		onDragEvent.SendEvent(PlayMakerUGuiSceneProxy.fsm,eventTarget);
+		onDragEvent.SendEvent(null,eventTarget);
 	}
 	
 	public void OnEndDrag (PointerEventData data) {
@@ -56,7 +56,7 @@ public class PlayMakerUGuiDragEventsProxy : MonoBehaviour, IDragHandler, IBeginD
 		}
 
 		GetLastPointerDataInfo.lastPointeEventData = data;
-		onEndDragEvent.SendEvent(PlayMakerUGuiSceneProxy.fsm,eventTarget);
+		onEndDragEvent.SendEvent(null,eventTarget);
 	}
 
 }

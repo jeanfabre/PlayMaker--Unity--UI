@@ -1,5 +1,13 @@
 #PlayMaker uGui Change log
 
+
+###1.4
+**Release** 15/08/2017
+
+**new**
+- removed the need for a ugui proxy to send events  
+
+
 ###1.3.9
 **Release** 03/08/2017
 

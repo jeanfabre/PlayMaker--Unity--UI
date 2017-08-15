@@ -484,28 +484,13 @@ public class PlayMakerUGuiComponentProxy : MonoBehaviour {
 	void FirePlayMakerEvent(FsmEventData eventData)
 	{
 
-//		if (eventData!=null)
-//		{
-//			HutongGames.PlayMaker.Fsm.EventData = eventData;
-//		}
-
 		fsmEventTarget.excludeSelf = false; // not available in this context, only when even ti sfired from an Fsm.
 
 		fsmEventTarget.sendToChildren = fsmEventSetup.sendtoChildren;
 
-//		if (PlayMakerUGuiSceneProxy.fsm == null)
-//		{
-//			Debug.LogError("Missing 'PlayMaker UGui' prefab in scene");
-//			return;
-//		}
-
-		//Fsm _fsm = 	PlayMakerUGuiSceneProxy.fsm.Fsm;
-
 		if (debug) Debug.Log("Fire event: "+GetEventString());
 
-		//_fsm.Event(fsmEventTarget,GetEventString());
-
-		PlayMakerUtils.SendEventToTarget(PlayMakerUGuiSceneProxy.fsm,fsmEventTarget,GetEventString(),eventData);
+		PlayMakerUtils.SendEventToTarget(null,fsmEventTarget,GetEventString(),eventData);
 	}
 
 
