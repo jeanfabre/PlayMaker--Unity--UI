@@ -1,0 +1,9 @@
+{
+"__ECO__":"__SAMPLE__",
+"Unity Modules":["UI"],
+"Version":"1.0.0",
+"UnityMinimumVersion":"4.7.2",
+"PlayMakerMinimumVersion":"1.8.5",
+"unitypackage":"PlayMaker/Ecosystem/Custom Samples/uGui/uGuiDragInWorldSpace.unitypackage",
+"pingAssetPath":"Assets/PlayMaker Custom Samples/uGui/uGuiDragInWorldSpace.unity"
+}
