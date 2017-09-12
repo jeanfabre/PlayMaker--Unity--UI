@@ -1,12 +1,20 @@
 #PlayMaker uGui Change log
 
+###1.5
+**Release** 12/09/2017
+
+**new**
+- new set of actions for controlling grid layout  
+
+**fix**
+- uguiDropDownAddOptions fixed when not setting sprite field
+
 
 ###1.4
 **Release** 15/08/2017
 
 **new**
 - removed the need for a ugui proxy to send events  
-
 
 ###1.3.9
 **Release** 03/08/2017

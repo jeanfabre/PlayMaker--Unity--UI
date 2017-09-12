@@ -68,7 +68,7 @@ namespace HutongGames.PlayMaker.Actions
 								new UnityEngine.UI.Dropdown.OptionData()
 								{ 	
 									text=_text.Value,
-									image= (Sprite) optionImage[i].RawValue
+									image= optionImage[i].RawValue as Sprite
 								}
 							);
 					i++;
