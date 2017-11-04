@@ -6,16 +6,20 @@ using HutongGames.PlayMaker;
 
 namespace HutongGames.PlayMaker.Actions
 {
-	[ActionCategory("Ugui")]
-	[Tooltip("Sets the Main Camera.")]
-	public class UguiUiToWorldPoint : FsmStateAction
+    [ActionCategory("uGui")]
+    [Tooltip("Sets the Main Camera.")]
+    public class UguiUiToWorldPoint : FsmStateAction
     {
-		[RequiredField]
-		[CheckForComponent(typeof(Camera))]
-		[Tooltip("The GameObject to set as the main camera (should have a Camera component).")]
-		public FsmOwnerDefault gameObjectCamera;
+        [RequiredField]
+        [CheckForComponent(typeof(Camera))]
+        [Tooltip("The GameObject to set as the main camera (should have a Camera component).")]
+        public FsmOwnerDefault gameObjectCamera;
 
+        [RequiredField]
         public FsmGameObject uiElement;
+
+        [ActionSection("Set Target position OR Target Object")]
+        public FsmVector3 targetPosition;
 
         public FsmGameObject target;
 
@@ -24,15 +28,20 @@ namespace HutongGames.PlayMaker.Actions
         [Tooltip("Repeat every frame.")]
         public bool everyFrame;
 
+        private Vector3 tar;
+
         public override void Reset()
-		{
+        {
             gameObjectCamera = null;
             uiElement = null;
             everyFrame = false;
+            target = new FsmGameObject() { UseVariable = true };
+            targetPosition = new FsmVector3() { UseVariable = true };
+            offset = new FsmVector3() { UseVariable = true };
         }
 
-		public override void OnEnter()
-		{
+        public override void OnEnter()
+        {
             if (!everyFrame)
             {
                 DoUiToWorldPoint();
@@ -43,7 +52,6 @@ namespace HutongGames.PlayMaker.Actions
         public override void OnUpdate()
         {
             DoUiToWorldPoint();
-
         }
 
 
@@ -52,21 +60,42 @@ namespace HutongGames.PlayMaker.Actions
             var go = Fsm.GetOwnerDefaultTarget(gameObjectCamera);
             if (go == null) return;
 
-            if(offset == null)
+            if (offset == null || offset.Value == Vector3.zero)
             {
-                Vector3 tar = target.Value.transform.position;
+                if (!targetPosition.IsNone)
+                {
+                    tar = targetPosition.Value;
+                }
+                else
+                {
+                    if (!target.IsNone)
+                    {
+                        tar = target.Value.transform.position;
+                    }
+                    else return;
+                }
+
+
             }
             else
             {
-                Vector3 tar = target.Value.transform.position + offset.Value;
+                if (!targetPosition.IsNone)
+                {
+                    tar = targetPosition.Value + offset.Value;
+                }
+                else
+                {
+                    if (!target.IsNone)
+                    {
+                        tar = target.Value.transform.position + offset.Value;
+                    }
+                    else return;
+                }
             }
-           
-
-
 
             Camera _camera = go.GetComponent<Camera>();
-            Vector3 objectPos = _camera.WorldToScreenPoint(target.Value.transform.position);
+            Vector3 objectPos = _camera.WorldToScreenPoint(tar);
             uiElement.Value.transform.position = objectPos;
         }
-	}
+    }
 }
