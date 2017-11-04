@@ -16,6 +16,7 @@ namespace HutongGames.PlayMaker.Actions
         public FsmOwnerDefault gameObjectCamera;
 
         [RequiredField]
+        [Tooltip("this should be a ui element else you will get strange behaviour")]
         public FsmGameObject uiElement;
 
         [ActionSection("Set Target position OR Target Object")]
