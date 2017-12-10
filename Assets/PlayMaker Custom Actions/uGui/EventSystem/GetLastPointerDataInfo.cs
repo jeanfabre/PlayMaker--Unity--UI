@@ -84,8 +84,10 @@ namespace HutongGames.PlayMaker.Actions
 		[UIHint(UIHint.Variable)]
 		public FsmVector3 worldPosition;
 
+        [Tooltip("Repeat every frame.")]
+        public bool everyFrame;
 
-		public override void Reset()
+        public override void Reset()
 		{
 			clickCount = null;
 			clickTime = null;
@@ -111,9 +113,25 @@ namespace HutongGames.PlayMaker.Actions
 			useDragThreshold = null;
 			worldNormal = null;
 			worldPosition = null;
-		}
-		
-		public override void OnEnter()
+            everyFrame = false;
+        }
+
+        public override void OnEnter()
+        {
+            OnPointerEvent();
+
+            if (!everyFrame)
+            {
+                Finish();
+            }
+        }
+
+        public override void OnUpdate()
+        {
+            OnPointerEvent();
+        }
+
+            void OnPointerEvent()
 		{
 
 			if (lastPointeEventData==null)
@@ -237,9 +255,6 @@ namespace HutongGames.PlayMaker.Actions
 			{
 				worldPosition.Value =  lastPointeEventData.pointerCurrentRaycast.worldPosition;
 			}
-
-
-			Finish();
 		}
 	}
 }
