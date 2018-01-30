@@ -1,13 +1,21 @@
 #PlayMaker uGui Change log
+
+###1.6 
+**Release** 26/01/2018 
+ 
+**new** 
+- new action `uGuiScrollRectGoToItem`  
+ 
+ 
 ###1.5.1
 **Release** 10/12/2017
 
 **new**
-- new action UguiUiToWorldPoint
-- new action uGuiTextSetFont
+- new action `UguiUiToWorldPoint`
+- new action `uGuiTextSetFont`
 
 **fix**
-- added every frame to Get Last Pointer Data Info
+- added every frame to `Get Last Pointer Data Info`
 
 ###1.5
 **Release** 12/09/2017
