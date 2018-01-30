@@ -2,7 +2,11 @@
 "__ECO__":"__PACKAGE__",
 "Type":"Unity Module",
 "UnityModules":["UI"],
+<<<<<<< HEAD
 "Version":"1.6",
+=======
+"Version":"1.5.1",
+>>>>>>> master
 "UnityMinimumVersion":"4.7",
 "PlayMakerMinimumVersion":"1.8.3",
 "unitypackage":"PlayMaker/Ecosystem/Custom Packages/uGui/uGuiProxyFull.unitypackage",
