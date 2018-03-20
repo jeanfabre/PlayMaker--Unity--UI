@@ -1,0 +1,10 @@
+{
+"__ECO__":"__SAMPLE__",
+"Unity Modules":["UI"],
+"Version":"1.0.0",
+"UnityMinimumVersion":"4.7.0",
+"PlayMakerMinimumVersion":"1.8.0",
+"unitypackage":"PlayMaker/Ecosystem/Custom Samples/uGui/uGuiFadeEffect.unitypackage",
+"pingAssetPath":"Assets/PlayMaker Custom Samples/uGui/uGuiFadeEffect/uGuiFadeEffect.unity",
+"Keywords":"Fade in out"
+}
