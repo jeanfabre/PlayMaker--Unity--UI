@@ -405,6 +405,9 @@ public class PlayMakerUGuiComponentProxyInspector : Editor {
 		if (_target.fsmVariableSetup.variableType == VariableType.Bool)
 		{
 			_list = fsmVariables.GetNames(typeof(FsmBool));
+		}else if (_target.fsmVariableSetup.variableType == VariableType.Int)
+		{
+			_list = fsmVariables.GetNames(typeof(FsmInt));
 		}else if (_target.fsmVariableSetup.variableType == VariableType.Float)
 		{
 			_list = fsmVariables.GetNames(typeof(FsmFloat));
