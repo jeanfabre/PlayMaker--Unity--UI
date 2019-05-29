@@ -114,7 +114,7 @@ public class BoxCollider2dMatchRectTransform : MonoBehaviour {
 		_size = bounds.size;
 
 		_bc2d.size =  _size + _margin;
-		_bc2d.center = bounds.center;
+		_bc2d.offset = bounds.center;
 
 
 	}
